@@ -438,7 +438,7 @@ contextInfo: {
 forwardingScore: 999,
 isForwarded: true,
 forwardedNewsletterMessageInfo: {
-newsletterName: "Click here to get $69",
+newsletterName: ownername,
 newsletterJid: "120363222395675670@newsletter",
 },
 externalAdReply: {  
@@ -740,6 +740,25 @@ return m.reply("Erro..")
 })
 }
 
+async function ping () {
+  var pingload = [
+    `PONG 😘`,
+    `
+> 📌 Hey there, 🤗
+> ${botname} is online 📡🛰️
+> 📌 ʀᴇsᴘᴏɴsᴇ sᴘᴇᴇᴅ :  ${latensie.toFixed(4)} ms 🏃
+> 📌 ʀᴜɴᴛɪᴍᴇ : ${runtime(process.uptime())}⏰
+> 📌 ᴄʀᴇᴀᴛᴇᴅ ʙʏ : ${ownername} 👑
+> 📌 ᴅᴇᴘʟᴏʏᴇᴅ ᴏɴ : ${os.hostname()} 🛜
+> 📌 ᴄʜᴇᴄᴋᴇᴅ ʙʏ : ${pushname} `
+
+  ]
+  let { key } = await XeonBotInc.sendMessage(from, {text: 'PONG'})
+  
+  for (let i = 0; i < pingload.length; i++) {
+  await XeonBotInc.sendMessage(from, {text: pingload[i], edit: key })
+  }
+  } 
 async function introduction ()
 {
   let intro = { key: 
@@ -6903,57 +6922,146 @@ break
             break
                 //bot status
                 case 'ping': case 'botstatus': case 'statusbot': case 'p':
-                  let fgg = { key: { fromMe: false, participant: `0@s.whatsapp.net`, remoteJid: 'status@broadcast' }, message: { contactMessage: { displayName: `꧁﴿.·»✥«·-𝕯𝕯 𝕮𝖍𝖊𝖊𝖒𝖘-𝕭𝖔𝖙-·»✥«.·﴾꧂\n Created by: ${ownername}😎`, vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:'CHEEMS-BOT'\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}}
+                  await XeonBotInc.sendMessage(m.chat, { react: { text: `↕️`, key: m.key }})
+                  let ping_quote = { key: 
+                    { fromMe: false, 
+                      participant: m.sender, 
+                      remoteJid: "status@broadcast" },
+                     message: {extendedTextMessage: 
+                              { text: `Check BOT Responsse Speed 🛜`}
+                    }
+                  }
                   let timestampe = speed()
+                  
                   let latensie = speed() - timestampe
-                   let ping = `> 📌 Hey there, 🤗
-> ${botname} 
-> is online 📡🛰️
+                  let ping1 = [
+                    `PONG `,
+                    `PONG. `,
+                    `PONG.. `,
+                    `PONG... `,
+                  ]
+                  let { key } = await XeonBotInc.sendMessage(from, {text: `PONG`}, {quoted: ping_quote})
+                  for (let j = 0; j < ping1.length; j++) {
+                  for (let i = 0; i < ping1.length; i++) {
+                   await XeonBotInc.sendMessage(from, {text: ping1[i], edit: key }, {quoted: m})
+                   }
+                  }
+                   let ping = [
+
+                    `
+                    👉 𝐂𝐇𝐄𝐄𝐌𝐒 𝐁𝐎𝐓 𝐕-𝟏𝟒 👈
+✯────────────✯────────────✯
+✯────────────✯────────────✯`,
+`
+                    👉 𝐂𝐇𝐄𝐄𝐌𝐒 𝐁𝐎𝐓 𝐕-𝟏𝟒 👈
+✯────────────✯────────────✯
+
+𝐁𝐎𝐓 𝐈𝐍𝐅𝐎
+
+✯────────────✯────────────✯`,
+`
+                    👉 𝐂𝐇𝐄𝐄𝐌𝐒 𝐁𝐎𝐓 𝐕-𝟏𝟒 👈
+✯────────────✯────────────✯
+
+𝐁𝐎𝐓 𝐈𝐍𝐅𝐎
+
+> 📌 Hey there, 🤗        
+
+✯────────────✯────────────✯`,                    `
+                    👉 𝐂𝐇𝐄𝐄𝐌𝐒 𝐁𝐎𝐓 𝐕-𝟏𝟒 👈
+✯────────────✯────────────✯
+
+𝐁𝐎𝐓 𝐈𝐍𝐅𝐎
+
+> 📌 Hey there, 🤗
+> ${botname} is online 📡🛰️
+
+✯────────────✯────────────✯`,                    `
+                    👉 𝐂𝐇𝐄𝐄𝐌𝐒 𝐁𝐎𝐓 𝐕-𝟏𝟒 👈
+✯────────────✯────────────✯
+
+𝐁𝐎𝐓 𝐈𝐍𝐅𝐎
+
+> 📌 Hey there, 🤗
+> ${botname} is online 📡🛰️
+> 📌 ʀᴇsᴘᴏɴsᴇ sᴘᴇᴇᴅ :  ${latensie.toFixed(4)} ms 🏃
+
+✯────────────✯────────────✯`,                    `
+                    👉 𝐂𝐇𝐄𝐄𝐌𝐒 𝐁𝐎𝐓 𝐕-𝟏𝟒 👈
+✯────────────✯────────────✯
+
+𝐁𝐎𝐓 𝐈𝐍𝐅𝐎
+
+> 📌 Hey there, 🤗
+> ${botname} is online 📡🛰️
 > 📌 ʀᴇsᴘᴏɴsᴇ sᴘᴇᴇᴅ :  ${latensie.toFixed(4)} ms 🏃
 > 📌 ʀᴜɴᴛɪᴍᴇ : ${runtime(process.uptime())}⏰
->  
-> 📌 ᴄʀᴇᴀᴛᴇᴅ ʙʏ : ${ownername} 👑`
-await XeonBotInc.sendMessage(m.chat, { react: { text: `🏃🏼‍♂️`, key: m.key }})
-await sleep(300)
-                  XeonBotInc.sendMessage(m.chat, {
-                      text: ping,
-                    
-                  }, {
-                      quoted: fgg
-                  })
-for (i=0;i<5;i++){
-await XeonBotInc.sendMessage(m.chat, { react: { text: `😀`, key: m.key }})
-await sleep(200)
-await XeonBotInc.sendMessage(m.chat, { react: { text: `😁`, key: m.key }})
-await sleep(200)
-await XeonBotInc.sendMessage(m.chat, { react: { text: `😂`, key: m.key }})
-await sleep(200)
-await XeonBotInc.sendMessage(m.chat, { react: { text: `🤣`, key: m.key }})
-await sleep(200)
-await XeonBotInc.sendMessage(m.chat, { react: { text: `😃`, key: m.key }})
-await sleep(200)
-await XeonBotInc.sendMessage(m.chat, { react: { text: `😄`, key: m.key }})
-await sleep(200)
-await XeonBotInc.sendMessage(m.chat, { react: { text: `😅`, key: m.key }})
-await sleep(200)
-await XeonBotInc.sendMessage(m.chat, { react: { text: `😆`, key: m.key }})
-await sleep(200)
-await XeonBotInc.sendMessage(m.chat, { react: { text: `😉`, key: m.key }})
-await sleep(200)
-await XeonBotInc.sendMessage(m.chat, { react: { text: `😊`, key: m.key }})
-await sleep(200)
-await XeonBotInc.sendMessage(m.chat, { react: { text: `😋`, key: m.key }})
-await sleep(200)
-await XeonBotInc.sendMessage(m.chat, { react: { text: `😎`, key: m.key }})
-await sleep(200)
-await XeonBotInc.sendMessage(m.chat, { react: { text: `😍`, key: m.key }})
-await sleep(200)
+
+✯────────────✯────────────✯`,                    `
+                    👉 𝐂𝐇𝐄𝐄𝐌𝐒 𝐁𝐎𝐓 𝐕-𝟏𝟒 👈
+✯────────────✯────────────✯
+
+𝐁𝐎𝐓 𝐈𝐍𝐅𝐎
+
+> 📌 Hey there, 🤗
+> ${botname} is online 📡🛰️
+> 📌 ʀᴇsᴘᴏɴsᴇ sᴘᴇᴇᴅ :  ${latensie.toFixed(4)} ms 🏃
+> 📌 ʀᴜɴᴛɪᴍᴇ : ${runtime(process.uptime())}⏰
+> 📌 ᴄʀᴇᴀᴛᴇᴅ ʙʏ : ${ownername} 👑
+
+✯────────────✯────────────✯`,                    `
+                    👉 𝐂𝐇𝐄𝐄𝐌𝐒 𝐁𝐎𝐓 𝐕-𝟏𝟒 👈
+✯────────────✯────────────✯
+
+𝐁𝐎𝐓 𝐈𝐍𝐅𝐎
+
+> 📌 Hey there, 🤗
+> ${botname} is online 📡🛰️
+> 📌 ʀᴇsᴘᴏɴsᴇ sᴘᴇᴇᴅ :  ${latensie.toFixed(4)} ms 🏃
+> 📌 ʀᴜɴᴛɪᴍᴇ : ${runtime(process.uptime())}⏰
+> 📌 ᴄʀᴇᴀᴛᴇᴅ ʙʏ : ${ownername} 👑
+> 📌 ᴘʟᴀᴛғғᴏʀᴍ : ${os.hostname()} 🛜
+
+✯────────────✯────────────✯`,
+`
+                    👉 𝐂𝐇𝐄𝐄𝐌𝐒 𝐁𝐎𝐓 𝐕-𝟏𝟒 👈
+✯────────────✯────────────✯
+
+𝐁𝐎𝐓 𝐈𝐍𝐅𝐎
+
+> 📌 Hey there, 🤗
+> ${botname} is online 📡🛰️
+> 📌 ʀᴇsᴘᴏɴsᴇ sᴘᴇᴇᴅ :  ${latensie.toFixed(4)} ms 🏃
+> 📌 ʀᴜɴᴛɪᴍᴇ : ${runtime(process.uptime())}⏰
+> 📌 ᴄʀᴇᴀᴛᴇᴅ ʙʏ : ${ownername} 👑
+> 📌 ᴘʟᴀᴛғғᴏʀᴍ : ${os.hostname()} 🛜
+> 📌 ᴄʜᴇᴄᴋᴇᴅ ʙʏ : ${pushname} 👀
+ 
+✯────────────✯────────────✯
+`,
+
+                   ]
+                   for (let i = 0; i < ping.length; i++) {
+                    await XeonBotInc.sendMessage(from, {text: ping[i], edit: key }, {quoted: m})
+                    await sleep(50)
+                    await XeonBotInc.sendMessage(m.chat, { react: { text: `⬇️`, key: m.key }})
+                    await sleep(50)
+                    await XeonBotInc.sendMessage(m.chat, { react: { text: `⬆️`, key: m.key }})
+                    await sleep(50)
+                    }
+               
+
 await XeonBotInc.sendMessage(m.chat, { react: { text: `📡`, key: m.key }})
-}
+
   break
   case 'handle':
     await handle();
   break
+  case 'intro' : case 'hi': case 'hello': case 'hii':
+    {
+await introduction ()
+    }
+    break
       case 'relay':
       if (!isPremium) return replygcxeon(mess.premium)
          let message = q ? q : ''

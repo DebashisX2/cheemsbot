@@ -30,6 +30,7 @@ const readline = require("readline")
 const { parsePhoneNumber } = require("libphonenumber-js")
 const makeWASocket = require("@whiskeysockets/baileys").default
 
+
 const store = makeInMemoryStore({
     logger: pino().child({
         level: 'silent',
@@ -239,19 +240,21 @@ ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 //welcome\\
 memb = metadata.participants.length
 XeonWlcm = await getBuffer(ppuser)
+
 XeonLft = await getBuffer(ppuser)
                 if (anu.action == 'add') {
                 const xeonbuffer = await getBuffer(ppuser)
                 let xeonName = num
+                let pushname = xeonName.pushName 
                 const xtime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
 	            const xdate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
+                let bio = await XeonBotInc.fetchStatus(num)
+                let username =XeonBotInc.getName(num)
 	            const xmembers = metadata.participants.length
                 xeonbody = `
 ┌────────❖ 𝕮𝖍𝖊𝖊𝖒𝖘 𝕭𝖔𝖙 ❖────────┐
 │「 𝗛𝗶 👋 」
 └┬❖ 「  @${xeonName.split("@")[0]}  」
-   │✑  𝖀𝖘𝖊𝖗𝖓𝖆𝖒𝖊: ${username}
-   │✑  𝕬𝖇𝖔𝖚𝖙  : ${bio}
    │✑  𝖂𝖊𝖑𝖈𝖔𝖒𝖊 𝕿𝖔 : ${metadata.subject}
    │✑  𝕸𝖊𝖒𝖇𝖊𝖗 : ${xmembers}th
    │✑  𝕵𝖔𝖎𝖓𝖊𝖉 𝖔𝖓 : 
@@ -266,16 +269,7 @@ XeonLft = await getBuffer(ppuser)
     |✑ 𝕲𝖗𝖔𝖚𝖕 𝕯𝖊𝖘𝖈𝖗𝖎𝖕𝖙𝖎𝖔𝖓:- 
     |  𝐑𝐄𝐀𝐃 𝐆𝐑𝐎𝐔𝐏 𝐃𝐄𝐒𝐂𝐑𝐈𝐏𝐓𝐈𝐎𝐍 𝐂𝐀𝐑𝐄𝐅𝐔𝐋𝐋𝐘 : 
          *${metadata.desc}*
-   └─┬──────────────────────┈ ⳹
-         │
-         │✑ ꧁𓊈𒆜•♣ 𝕯𝕯 𝕮𝖍𝖊𝖊𝖒𝖘 𝕭𝕺𝕿 ♣•𒆜𓊉꧂
-         │                       
-         │✑ 𝕮𝖗𝖊𝖆𝖙𝖊𝖉 𝕭𝖞 : ${ownername}
-         │
-         │✑ 𝖁𝖊𝖗𝖘𝖎𝖔𝖓: 13.0
-         │
-         │✑ 𝕻𝖗𝖊𝖋𝖎𝖝: ${global.xprefix}
-         └──────────────────────┈ ⳹`
+   └────────────────────────┈ ⳹`
 let msgs = generateWAMessageFromContent(anu.id, {
   viewOnceMessage: {
     message: {
@@ -292,12 +286,15 @@ let msgs = generateWAMessageFromContent(anu.id, {
           }),
           header: proto.Message.InteractiveMessage.Header.create({
           hasMediaAttachment: false,
-          ...await prepareWAMessageMedia({ image: XeonWlcm }, { upload: XeonBotInc.waUploadToServer })
           }),
           nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
             buttons: [{
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"GO TO INBOX","url":'https://wa.me/${xeonName.split("@")[0]}',"merchant_url":"https://www.google.com"}`
+            },
+           {
             "name": "quick_reply",
-              "buttonParamsJson": `{\"display_text\":\"Welcome 💐\",\"id\":\"\"}`
+              "buttonParamsJson": `{\"display_text\":\"WELCOCME 💐\",\"id\":\"\"}`
             }],
           }),
           contextInfo: {
@@ -317,9 +314,12 @@ let msgs = generateWAMessageFromContent(anu.id, {
 XeonBotInc.relayMessage(anu.id, msgs.message, {})
                 } else if (anu.action == 'remove') {
                 	const xeonbuffer = await getBuffer(ppuser)
-                    const xeontime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
-	                const xeondate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
+                  const xtime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
+	                const xdate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
+                  let bio = await XeonBotInc.fetchStatus(num)
+                  let username =XeonBotInc.getName(num)
                 	let xeonName = num
+                  let pushname = xeonName.pushName
                     const xeonmembers = metadata.participants.length
                     xeonbody = `
 ┌────────❖ 𝕮𝖍𝖊𝖊𝖒𝖘 𝕭𝖔𝖙 ❖────────┐
@@ -332,16 +332,7 @@ XeonBotInc.relayMessage(anu.id, msgs.message, {})
    │✑        𝕿𝖎𝖒𝖊: ${xdate} 
    │
    │✑  He/She is no more in this group 😔
-   └─┬──────────────────────┈ ⳹
-         │
-         │✑ ꧁𓊈𒆜•♣ 𝕯𝕯 𝕮𝖍𝖊𝖊𝖒𝖘 𝕭𝕺𝕿 ♣•𒆜𓊉꧂
-         │                       
-         │✑ 𝕮𝖗𝖊𝖆𝖙𝖊𝖉 𝕭𝖞 : ${ownername}
-         │
-         │✑ 𝖁𝖊𝖗𝖘𝖎𝖔𝖓: 13.0
-         │
-         │✑ 𝕻𝖗𝖊𝖋𝖎𝖝: ${global.xprefix}
-         └──────────────────────┈ ⳹`
+   └────────────────────────┈ ⳹`
 let msgs = generateWAMessageFromContent(anu.id, {
   viewOnceMessage: {
     message: {
@@ -358,12 +349,14 @@ let msgs = generateWAMessageFromContent(anu.id, {
           }),
           header: proto.Message.InteractiveMessage.Header.create({
           hasMediaAttachment: false,
-          ...await prepareWAMessageMedia({ image: XeonLft }, { upload: XeonBotInc.waUploadToServer })
           }),
           nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
             buttons: [{
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"GO TO INBOX","url":'https://wa.me/${xeonName.split("@")[0]}',"merchant_url":"https://www.google.com"}`
+            },{
             "name": "quick_reply",
-              "buttonParamsJson": `{\"display_text\":\"Goodbye 👋\",\"id\":\"\"}`
+              "buttonParamsJson": `{\"display_text\":\"GOOD BYE 👋\",\"id\":\"\"}`
             }],
           }),
           contextInfo: {

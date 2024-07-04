@@ -1,12 +1,4 @@
 {
-  "sticker": {},
-  "database": {},
-  "game": {
-    "math": []
-  },
-  "others": {
-    "vote": []
-  },
   "users": {
     "919366316018@s.whatsapp.net": {
       "serialNumber": "5748ef2731f9b0ab993964d915670166",
@@ -194,8 +186,20 @@
       "premium": false,
       "limit": 100,
       "totalLimit": 0
+    },
+    "918116945233@s.whatsapp.net": {
+      "serialNumber": "05957399bcece96813118094ee1c71cc",
+      "title": "User",
+      "afkTime": -1,
+      "badword": 0,
+      "afkReason": "",
+      "nick": "~♥️😇✨RITAM✨😇♥️",
+      "premium": "false",
+      "limit": 100,
+      "totalLimit": 0
     }
   },
+  "database": {},
   "chats": {
     "120363047626537933@g.us": {
       "badword": false,
@@ -496,7 +500,30 @@
       "antilink": false,
       "antipromotion": false,
       "antilinkgc": false
+    },
+    "120363256563056288@g.us": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false
     }
+  },
+  "game": {
+    "math": []
   },
   "settings": {
     "919366316018@s.whatsapp.net": {
@@ -624,13 +651,13 @@
       }
     },
     "15202238877@s.whatsapp.net": {
-      "totalhit": 148,
+      "totalhit": 209,
       "totalError": 0,
       "online": false,
       "autosticker": false,
       "autodownload": false,
       "autobio": false,
-      "autoread": false,
+      "autoread": true,
       "autoblocknum": false,
       "onlyindia": false,
       "onlyindo": false,
@@ -655,5 +682,9 @@
       }
     }
   },
-  "message": {}
+  "message": {},
+  "sticker": {},
+  "others": {
+    "vote": []
+  }
 }
