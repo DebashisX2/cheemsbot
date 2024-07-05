@@ -476,7 +476,8 @@
       "anticontact": false,
       "antilink": false,
       "antipromotion": false,
-      "antilinkgc": false
+      "antilinkgc": false,
+      "antipromote": false
     },
     "14437095780@s.whatsapp.net": {
       "badword": false,
@@ -517,7 +518,8 @@
       "anticontact": false,
       "antilink": false,
       "antipromotion": false,
-      "antilinkgc": false
+      "antilinkgc": false,
+      "antipromote": false
     },
     "120363236965220457@g.us": {
       "badword": false,
@@ -772,7 +774,7 @@
       }
     },
     "15202238877@s.whatsapp.net": {
-      "totalhit": 258,
+      "totalhit": 272,
       "totalError": 0,
       "online": false,
       "autosticker": false,

