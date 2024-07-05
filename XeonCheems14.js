@@ -165,6 +165,7 @@ others: {},
 users: {},
 chats: {},
 settings: {},
+antipromote: {},
 ...(global.db.data || {})
 }
 
@@ -557,6 +558,7 @@ return arr[Math.floor(Math.random() * arr.length)]
                   if (!('badword' in chats)) chats.badword = false
                   if (!('antiforeignnum' in chats)) chats.antiforeignnum = false
                   if (!('antibot' in chats)) chats.antibot = false
+                  if (!('antipromote' in chats)) chats.antipromote = false
                   if (!('antiviewonce' in chats)) chats.antiviewonce = true
                   if (!('antispam' in chats)) chats.antispam = false
                   if (!('antimedia' in chats)) chats.media = false
@@ -577,6 +579,7 @@ return arr[Math.floor(Math.random() * arr.length)]
                   antiforeignnum: false,
                   antibot: false,
                   antiviewonce: true,
+                  antipromote: true,
                   antispam: false,
                   antivirtex: false,
                   antimedia: false,
@@ -1798,7 +1801,7 @@ fs.writeFileSync('./src/data/role/user.json', JSON.stringify(xeonverifieduser, n
                     }
                  }
               }, {quoted :m})
-          
+              await XeonBotInc.sendMessage(m.chat, { react: { text: `💵`, key: m.key }})
           }
           break
           
@@ -1815,6 +1818,7 @@ fs.writeFileSync('./src/data/role/user.json', JSON.stringify(xeonverifieduser, n
        let XeonWlcm = await getBuffer(ppuser)
   
   let message =`your username is ${username}`
+  await XeonBotInc.sendMessage(m.chat, { react: { text: `👤`, key: m.key }})
   XeonBotInc.sendMessage(m.chat,
     { text: message,
      contextInfo:{
@@ -1856,6 +1860,7 @@ fs.writeFileSync('./src/data/role/user.json', JSON.stringify(xeonverifieduser, n
               XeonWlcm = await getBuffer(ppuser)
            
               let mywhatsapp = walink
+              await XeonBotInc.sendMessage(m.chat, { react: { text: `🎮`, key: m.key }})
             XeonBotInc.sendMessage(m.chat,
             { text: 'click on the context info to get redirected to my Whatsapp ',
               contextInfo:{
@@ -1894,6 +1899,7 @@ fs.writeFileSync('./src/data/role/user.json', JSON.stringify(xeonverifieduser, n
               XeonWlcm = await getBuffer(ppuser)
 
             let face = fbprofile
+            await XeonBotInc.sendMessage(m.chat, { react: { text: `🎮`, key: m.key }})
             XeonBotInc.sendMessage(m.chat,
               { text: 'click on the context info to get redirected to my Facebook ',
               contextInfo:{
@@ -1931,6 +1937,7 @@ fs.writeFileSync('./src/data/role/user.json', JSON.stringify(xeonverifieduser, n
               XeonWlcm = await getBuffer(ppuser)
 
             let myig = igprofile
+            await XeonBotInc.sendMessage(m.chat, { react: { text: `🎮`, key: m.key }})
             XeonBotInc.sendMessage(m.chat,
               { text: 'click on the context info to get redirected to my Instagram ',
               contextInfo:{
@@ -1968,6 +1975,7 @@ fs.writeFileSync('./src/data/role/user.json', JSON.stringify(xeonverifieduser, n
             XeonWlcm = await getBuffer(ppuser)
 
             let mygithub = gitprof
+            await XeonBotInc.sendMessage(m.chat, { react: { text: `🎮`, key: m.key }})
             XeonBotInc.sendMessage(m.chat,
               { text: 'click on the context info to get redirected to my GitHub ',
               contextInfo:{
@@ -2006,6 +2014,8 @@ fs.writeFileSync('./src/data/role/user.json', JSON.stringify(xeonverifieduser, n
               XeonWlcm = await getBuffer(ppuser)
 
             let mytelegram = tg
+            
+            await XeonBotInc.sendMessage(m.chat, { react: { text: `🎮`, key: m.key }})
             XeonBotInc.sendMessage(m.chat,
               { text: 'click on the context info to get redirected to my Telegram ',
               contextInfo:{
@@ -2029,9 +2039,10 @@ fs.writeFileSync('./src/data/role/user.json', JSON.stringify(xeonverifieduser, n
     case 'fakedoc' :
       {
         if (!text) return replygcxeon(`Example: ${prefix + command} docname, size`)
-          if (!/,/.test(text)) return replygcxeon(`The data you provided is invalid!, Example: \n ${prefix + command} docname, size `)
+          if (!/,/.test(text)) return replygcxeon(`The data you provided is invalid!, Example: \n ${prefix + command} docname, size,type `)
             let docname = q.split(",")[0]
             let docsize = q.split(",")[1]
+            let doctype = q.split(", ")[2]
             
             let quotedoc = { key: 
               { fromMe: false, 
@@ -2050,6 +2061,7 @@ fs.writeFileSync('./src/data/role/user.json', JSON.stringify(xeonverifieduser, n
             } catch (e) {
               console.error(e)
             }
+            await XeonBotInc.sendMessage(m.chat, { react: { text: `📄`, key: m.key }})
             XeonBotInc.sendMessage(m.chat, { delete: key })
         XeonBotInc.sendMessage(m.chat, {
           
@@ -2057,7 +2069,7 @@ fs.writeFileSync('./src/data/role/user.json', JSON.stringify(xeonverifieduser, n
           url: thumbimage_url
        },
           
-          mimetype: 'application/zip',
+          mimetype: `application/${doctype}`,
           fileName: docname,
           fileLength: docsize,
 
@@ -2070,6 +2082,7 @@ break
       function getRandomPercentage() {
           return Math.floor(Math.random() * 100) + 1;
       }
+      await XeonBotInc.sendMessage(m.chat, { react: { text: `👥`, key: m.key }})
       let ps = groupMetadata.participants.map(v => v.id);
       let b,c,d,e,f,g,h,j,k,l,n,o,p,q,
       a= m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
@@ -2166,7 +2179,7 @@ break
       ppuser = 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
       }
   XeonWlcm = await getBuffer(ppuser)
-  
+  await XeonBotInc.sendMessage(m.chat, { react: { text: `👩‍❤️‍👨`, key: m.key }})
   XeonBotInc.sendMessage(m.chat,
       { text: xeonbody,
           image: XeonWlcm,
@@ -5868,6 +5881,19 @@ await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 }
             }
             break
+            case 'antipromote': {
+              if (!m.isGroup) return XeonStickGroup()
+if (!isBotAdmins) return XeonStickBotAdmin()
+if (!isAdmins && !XeonTheCreator) return XeonStickAdmin()
+              if (args.length < 1) return replygcxeon('on/off?')
+              if (args[0] === 'on') {
+                 db.data.chats[from].antipromote = true
+                 replygcxeon(`${command} is enabled`)
+              } else if (args[0] === 'off') {
+                 db.data.chats[from].antipromote = false
+                 replygcxeon(`${command} is disabled`)
+              }
+           }
             case 'antipromotion': {
                if (!m.isGroup) return XeonStickGroup()
 if (!isBotAdmins) return XeonStickBotAdmin()
@@ -6922,7 +6948,7 @@ break
             break
                 //bot status
                 case 'ping': case 'botstatus': case 'statusbot': case 'p':
-                  await XeonBotInc.sendMessage(m.chat, { react: { text: `↕️`, key: m.key }})
+                  await XeonBotInc.sendMessage(m.chat, { react: { text: `🛜`, key: m.key }})
                   let ping_quote = { key: 
                     { fromMe: false, 
                       participant: m.sender, 
@@ -6941,7 +6967,7 @@ break
                     `PONG... `,
                   ]
                   let { key } = await XeonBotInc.sendMessage(from, {text: `PONG`}, {quoted: ping_quote})
-                  for (let j = 0; j < ping1.length; j++) {
+                  for (let j = 0; j < 3; j++) {
                   for (let i = 0; i < ping1.length; i++) {
                    await XeonBotInc.sendMessage(from, {text: ping1[i], edit: key }, {quoted: m})
                    }
@@ -7043,15 +7069,16 @@ break
                    ]
                    for (let i = 0; i < ping.length; i++) {
                     await XeonBotInc.sendMessage(from, {text: ping[i], edit: key }, {quoted: m})
-                    await sleep(50)
-                    await XeonBotInc.sendMessage(m.chat, { react: { text: `⬇️`, key: m.key }})
-                    await sleep(50)
-                    await XeonBotInc.sendMessage(m.chat, { react: { text: `⬆️`, key: m.key }})
-                    await sleep(50)
+                    await sleep(100)
+                    await XeonBotInc.sendMessage(m.chat, { react: { text: `⬇️`, key: key }})
+                    await sleep(100)
+                    await XeonBotInc.sendMessage(m.chat, { react: { text: `⬆️`, key: key }})
+                    await sleep(100)
                     }
                
 
-await XeonBotInc.sendMessage(m.chat, { react: { text: `📡`, key: m.key }})
+                    await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key: m.key }})
+                    await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key: key }})
 
   break
   case 'handle':
@@ -20907,13 +20934,13 @@ viewOnceMessage: {
 }]
 }`
             },
+            {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
            {
              "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
-           },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
+             "buttonParamsJson": `{"display_text":"SCRIPT 📝","id":"${prefix}script"}`
            },
            
          ]
@@ -20936,7 +20963,7 @@ viewOnceMessage: {
 quoted: mquote,
 })
 
-await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
+let {menumsg} = await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 }, )
 }
@@ -21267,9 +21294,9 @@ const sendSlide = async (jid, title, message, footer, slides) => {
     );
 
                   
-    await XeonBotInc.relayMessage(jid, msg.message, {
+   await XeonBotInc.relayMessage(jid, msg.message, {
         messageId: msg.key.id,
-    });
+    })
 };
 // Call the function with example parameters
 sendSlide(m.chat, 'DD CHEEMS BOT MENU SLIDES', xmenu_oh, botname, slides);

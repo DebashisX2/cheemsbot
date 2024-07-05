@@ -30,6 +30,9 @@ const readline = require("readline")
 const { parsePhoneNumber } = require("libphonenumber-js")
 const makeWASocket = require("@whiskeysockets/baileys").default
 
+// premium users
+let premium = JSON.parse(fs.readFileSync('./src/data/role/premium.json'))
+
 
 const store = makeInMemoryStore({
     logger: pino().child({
@@ -55,6 +58,7 @@ global.loadDatabase = async function loadDatabase() {
     game: {},
     settings: {},
     message: {},
+    antipromote : {},
     ...(global.db.data || {})
   }
   global.db.chain = _.chain(global.db.data)
@@ -414,6 +418,7 @@ let participants = anu.participants
 for (let num of participants) {
 try {
 ppuser = await XeonBotInc.profilePictureUrl(num, 'image')
+let XeonWlcm = await getBuffer(ppuser)
 } catch (err) {
 ppuser = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60'
 }
@@ -423,12 +428,13 @@ ppgroup = await XeonBotInc.profilePictureUrl(anu.id, 'image')
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
 if (anu.action == 'promote') {
-    if (db.data.chats[m.chat].antipromote != true)
-    {    if(anu.author == '919339619072@s.whatsapp.net' || anu.author == '14437095780@s.whatsapp.net' || anu.author == '919062628928@s.whatsapp.net' ||anu.author == '918768298758@s.whatsapp.net')
-           {
-               let xeontime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
+
+  if(anu.author === '919339619072@s.whatsapp.net' || anu.author === '15202238877@s.whatsapp.net' || anu.author === '14437095780@s.whatsapp.net')
+{  
+    let xeontime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
                let xeondate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
             let xeonName = num
+            let XeonWlcm = await getBuffer(ppuser)
             xeonbody = ` 𝗖𝗼𝗻𝗴𝗿𝗮𝘁𝘀🎉 @${xeonName.split("@")[0]}, you have been *promoted* to *admin* \n\n> Time:  ${xeontime.split("@")[0]} \n> Date:  ${xeondate.split("@")[0]}`
             XeonBotInc.sendMessage(anu.id,
                    { text: xeonbody,
@@ -449,6 +455,7 @@ if (anu.action == 'promote') {
              let xeontime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
              let xeondate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
              let xeonName = num
+             let XeonWlcm = await getBuffer(ppuser)
               let promoter = anu.author
              xeonbody = ` 𝗖𝗼𝗻𝗴𝗿𝗮𝘁𝘀🎉 @${xeonName.split("@")[0]}, you have been *promoted* to *admin* \n*Promoted by* @${promoter.split("@")[0]}\n\n> Time:  ${xeontime.split("@")[0]} \n> Date:  ${xeondate.split("@")[0]}`
              XeonBotInc.sendMessage(anu.id,
@@ -466,45 +473,18 @@ if (anu.action == 'promote') {
                                }
                    })
            }
-     
-    }
-
-   else if(db.data.chats[m.chat].antipromote = true) 
-   { 
-              let promoter = anu.author
-              let promotee = num
-              await XeonBotInc.groupParticipantsUpdate(anu.id, [num], 'demote')
-              await XeonBotInc.groupParticipantsUpdate(anu.id, [anu.author], 'demote')
-              let messagePMT = `@${promoter.split("@")[0]} Tried to promote @${promotee.split("@")[0]} \n\n Bro, 😂😂😂\n we are the GOD  here, Please don't try to be clever 😂\n`
-              XeonBotInc.sendMessage(anu.id,
-               { text: messagePMT,
-                contextInfo:{
-                       mentionedJid:[promotee, promoter],
-                        "externalAdReply": {"showAdAttribution": true,
-                        "containsAutoReply": true,
-                        "title": ` ${global.botname}`,
-                        "body": `${ownername}`,
-                        "previewType": "PHOTO",
-                       "thumbnailUrl": ``,
-                       "thumbnail": XeonWlcm,
-                        "sourceUrl": `${websitex}`}
-                           }
-               })
-       
-        
-   }
 } 
 else if (anu.action == 'demote') {
   
-   if (db.data.chats[m.chat].antipromote != true)
-   { 
-        if(anu.author != '919339619072@s.whatsapp.net' || anu.author != '14437095780@s.whatsapp.net' || anu.author != '919062628928@s.whatsapp.net' ||anu.author != '918768298758@s.whatsapp.net')
-        {
+  
+  if(anu.author === '919339619072@s.whatsapp.net' || anu.author === '15202238877@s.whatsapp.net' || anu.author === '14437095780@s.whatsapp.net')
+    {
             let xeontime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
             let xeondate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
+            let XeonWlcm = await getBuffer(ppuser)
             let xeonName = num
             let demoter = anu.author
-            xeonbody = ` *Oops!!* @${xeonName.split("@")[0]}, you have been *Demoted* from *Admin* \n*Demoted by* @${demoter.split("@")[0]}\n\n> Time:  ${xeontime.split("@")[0]} \n> Date:  ${xeondate.split("@")[0]}`
+            xeonbody = ` *Oops!!* @${xeonName.split("@")[0]}, you have been *Demoted* from *Admin* \n\n> Time:  ${xeontime.split("@")[0]} \n> Date:  ${xeondate.split("@")[0]}`
            XeonBotInc.sendMessage(anu.id,
                { text: xeonbody,
                     contextInfo:
@@ -523,8 +503,9 @@ else if (anu.action == 'demote') {
         {
             let xeontime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
             let xeondate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
+            let XeonWlcm = await getBuffer(ppuser)
             let xeonName = num
-            xeonbody = ` *Oops!!* @${xeonName.split("@")[0]}, you have been *Demoted* from *Admin*\n\n> Time:  ${xeontime.split("@")[0]} \n> Date:  ${xeondate.split("@")[0]}`
+            xeonbody = ` *Oops!!* @${xeonName.split("@")[0]}, you have been *Demoted* from *Admin* \n*Demoted by* @${demoter.split("@")[0]}\n\n> Time:  ${xeontime.split("@")[0]} \n> Date:  ${xeondate.split("@")[0]}`
    XeonBotInc.sendMessage(anu.id,
     { text: xeonbody,
     contextInfo:{
@@ -537,7 +518,7 @@ else if (anu.action == 'demote') {
    "thumbnailUrl": ``,
    "thumbnail": XeonWlcm,
    "sourceUrl": `${websitex}`}}})
-}  
+ 
 }
   
 }
