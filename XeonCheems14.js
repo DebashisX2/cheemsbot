@@ -1844,6 +1844,39 @@ if (m.sender != botnumber)
   }
 
         switch (isCommand) {
+		case 'getvar': case 'allvar':
+			{
+				let variables = `
+    YouTube channel link : ${ytname}
+    Github profile : ${socialm}
+    Address : ${location}
+    Facebook profile: ${fbprofile}
+    Instagram profile: ${igprofile}
+    Telegram profile : ${tg}
+    Whatsapp number : ${walink}
+    Botname : ${botname}
+    Owner Name : ${ownername}
+    Owner Number : ${ownernumber}
+    Website : ${websitex}
+    Whatsapp Group : ${wagc}
+    Theme emoji : ${themeemoji}
+    Owner reaction : ${owner_react}
+    Repo link : ${botscript}
+    Sticker pack name : ${packname}
+    Sticker Author name : ${author}
+    Creater : ${creater}
+    Prefix : ${xprefix}
+    Premium User : ${premium}
+    Menu type : ${typemenu}
+    Reply type : ${typereply}
+    Show welcome message : ${welcome}
+    Anticall : ${anticall}
+    Auto status view ${autoswview}`
+		
+    XeonBotInc.sendMessage(from, { text : variables}, {quoted : m})
+			
+			}
+			break
           case 'money':{
             
             if (args.length < 1) return replygcxeon('Ammount?')
