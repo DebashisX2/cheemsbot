@@ -261,6 +261,7 @@ module.exports = XeonBotInc = async (XeonBotInc, m, msg, chatUpdate, store) => {
         const isContact = (type == 'contactMessage')
         const isSticker = (type == 'stickerMessage')
         const isText = (type == 'textMessage')
+        const isEmoji = type === 'textmessage' && content.includes(randomreact)
         const isQuotedText = type === 'extendexTextMessage' && content.includes('textMessage')
         const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')
         const isQuotedLocation = type === 'extendedTextMessage' && content.includes('locationMessage')
@@ -1189,12 +1190,12 @@ function formatDuration(ms) {
         }
         }
         if (db.data.settings[botNumber].autorecord){
-        if (isCommand) {
-        	let xeonmix = ['recording']
-            xeonmix2 = xeonmix[Math.floor(xeonmix.length * Math.random())]
-            XeonBotInc.sendPresenceUpdate(xeonmix2, from)
-        }
-        }
+          if (isCommand) {
+            let xeonmix = ['recording','fucking']
+              xeonmix2 = xeonmix[Math.floor(xeonmix.length * Math.random())]
+              XeonBotInc.sendPresenceUpdate(xeonmix2, from)
+          }
+          }
         if (db.data.settings[botNumber].autotype){
         if (isCommand) {
         	let xeonpos = ['composing']
@@ -1797,6 +1798,42 @@ if (m.sender != botnumber)
           {
               await XeonBotInc.sendMessage(m.chat, { react: { text: `⌛`, key: m.key }})
           }
+          else if (isXeonMedia === "stickerMessage")
+          {
+            await sleep(1000)
+            await XeonBotInc.sendMessage(m.chat, { react: { text: `💟`, key: m.key }})
+          }
+          else if (isXeonMedia==='imageMessage')
+          {
+            await sleep(1000)
+            await XeonBotInc.sendMessage(m.chat, { react: { text: `📸`, key: m.key }})
+          }
+          else if (isXeonMedia==='videoMessage')
+          {
+            await sleep(1000)
+            await XeonBotInc.sendMessage(m.chat, { react: { text: `📹`, key: m.key }})
+          }
+          else if (isXeonMedia==='audioMessage')
+          {
+            await sleep(1000)
+            await XeonBotInc.sendMessage(m.chat, { react: { text: `🎧`, key: m.key }})
+          }
+          else if (isXeonMedia==='pollCreationMessage')
+          {
+            await sleep(1000)
+            await XeonBotInc.sendMessage(m.chat, { react: { text: `❔`, key: m.key }})
+          }
+          
+          else if (isXeonMedia==='documentMessage')
+            {
+              await sleep(1000)
+              await XeonBotInc.sendMessage(m.chat, { react: { text: `📃`, key: m.key }})
+            }
+            else if (isXeonMedia==='contactMessage')
+              {
+                await sleep(1000)
+                await XeonBotInc.sendMessage(m.chat, { react: { text: `📞`, key: m.key }})
+              }
           else 
           {
             let react = randomreact[Math.floor(Math.random() * randomreact.length)]
