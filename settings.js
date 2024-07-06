@@ -22,7 +22,7 @@ global.walink = 'https://wa.me/qr/ZPZ7Z6WYJ752O1'
 global.thumbimage_url = 'https://assets.telegraphindia.com/abp/2022/Jun/1655905064_roddur.jpg'
 //new
 global.botname = '꧁﴿»✥«·-𝕯𝕯 𝕮𝖍𝖊𝖊𝖒𝖘-𝕭𝖔𝖙-·»✥«﴾꧂' //ur bot name
-global.ownernumber = '14437095780@s.whatsapp.net' //ur owner number
+global.ownernumber = '919339619072@s.whatsapp.net' //ur owner number
 global.botnumber = '15202238877@s.whatsapp.net'
 global.ownername = '꧁﴿☬✞ 𝔇𝔢𝔟𝔞𝔰𝔥𝔦𝔰 𝔇𝔢𝔶 ✞☬﴾꧂™' //ur owner name
 global.websitex = "https://www.facebook.com/Debashi.Dey.X2/"
