@@ -148,3 +148,32 @@ const sendSlide = async (jid, title, message, footer, slides) => {
 // Call the function with example parameters
 sendSlide(m.chat, 'removed you', ownername, botname, slides);
 }}
+
+
+
+
+
+
+
+if (m.sender != botnumber)
+    {
+        if (m.sender == ownernumber)
+        {
+            await XeonBotInc.sendMessage(m.chat, { react: { text: `${owner_react}`, key: m.key }})
+        }
+        else if (m.sender != ownernumber)
+        {
+            if(isCommand)
+            {
+                await XeonBotInc.sendMessage(m.chat, { react: { text: `⌛`, key: m.key }})
+            }
+            else 
+            {
+                await XeonBotInc.sendMessage(m.chat, { react: { text: `${randomreact}`, key: m.key }})
+            }
+        }
+    }
+else if (m.sender == botnumber)
+    {
+        await XeonBotInc.sendMessage(m.chat, { react: { text: `🤖`, key: m.key }})
+    }

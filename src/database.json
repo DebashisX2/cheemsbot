@@ -274,6 +274,17 @@
       "premium": "false",
       "limit": 100,
       "totalLimit": 0
+    },
+    "917063004264@s.whatsapp.net": {
+      "serialNumber": "858b2c53c1f778648691f3074d1c4fdf",
+      "title": "User",
+      "afkTime": -1,
+      "badword": 0,
+      "afkReason": "",
+      "nick": "༒ ✿ 𝐀𝐧𝐤𝐢𝐭𝐚 ✿ ༒🍁❣️",
+      "premium": false,
+      "limit": 100,
+      "totalLimit": 0
     }
   },
   "database": {},
@@ -643,6 +654,27 @@
       "antilink": false,
       "antipromotion": false,
       "antilinkgc": false
+    },
+    "120363297684594929@g.us": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": true,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false
     }
   },
   "game": {
@@ -774,7 +806,7 @@
       }
     },
     "15202238877@s.whatsapp.net": {
-      "totalhit": 272,
+      "totalhit": 304,
       "totalError": 0,
       "online": false,
       "autosticker": false,

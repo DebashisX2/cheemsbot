@@ -171,6 +171,10 @@ antipromote: {},
 let vote = db.data.others.vote = []
 let kuismath = db.data.game.math = []
 
+// reaction emojies
+
+
+
 //time
 const xtime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
 const xdate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
@@ -1780,7 +1784,32 @@ click https://wa.me/${botNumber.split`@`[0]}`, m, { mentions: [roof.p, roof.p2] 
 xeonverifieduser.push(sender)
 fs.writeFileSync('./src/data/role/user.json', JSON.stringify(xeonverifieduser, null, 2))
 }
-        
+
+if (m.sender != botnumber)
+  {
+      if(m.sender === ownernumber)
+      {
+        await XeonBotInc.sendMessage(m.chat, { react: { text: `${owner_react}`, key: m.key }})
+      }
+      
+      else{
+          if(isCommand)
+          {
+              await XeonBotInc.sendMessage(m.chat, { react: { text: `⌛`, key: m.key }})
+          }
+          else 
+          {
+            let react = randomreact[Math.floor(Math.random() * randomreact.length)]
+              await XeonBotInc.sendMessage(m.chat, { react: { text: `${react}`, key: m.key }})
+          }
+        }
+      
+  }
+else if (m.sender === botnumber)
+{
+  await XeonBotInc.sendMessage(m.chat, { react: { text: `🤖`, key: m.key }})
+}
+
         switch (isCommand) {
           case 'money':{
             
@@ -1806,6 +1835,7 @@ fs.writeFileSync('./src/data/role/user.json', JSON.stringify(xeonverifieduser, n
           
   case 'username':
     {
+      await XeonBotInc.sendMessage(m.chat, { react: { text: `⁉️`, key: m.key }})
        let user= m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net' 
         username =XeonBotInc.getName(user)
         
@@ -4552,6 +4582,11 @@ await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
                     }
                 }
                 XeonBotInc.sendMessage(m.chat, reactionMessage)
+            }
+            break
+            case 'rea' : 
+            {
+              await XeonBotInc.sendMessage(m.chat, { react: { text: `${reaction}`, key: m.key }})
             }
             break
            case 'nsfw': {
@@ -30491,6 +30526,7 @@ XeonBotInc.sendMessage(m.chat, { video: audiobuffy })
 break
 
             default:
+
                 if (budy.startsWith('=>')) {
                     if (!XeonTheCreator) return XeonStickOwner()
                     function Return(sul) {
@@ -30525,6 +30561,8 @@ break
                         if (stdout) return replygcxeon(stdout)
                     })
                 }
+                
+                
                 if (isCmd && budy.toLowerCase() != undefined) {
 if (m.chat.endsWith('broadcast')) return
 if (m.isBaileys) return
