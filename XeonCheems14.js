@@ -1805,10 +1805,6 @@ if (m.sender != botnumber)
         }
       
   }
-else if (m.sender === botnumber)
-{
-  await XeonBotInc.sendMessage(m.chat, { react: { text: `🤖`, key: m.key }})
-}
 
         switch (isCommand) {
           case 'money':{
