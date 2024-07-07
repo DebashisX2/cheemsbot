@@ -1847,31 +1847,32 @@ if (m.sender != botnumber)
 		case 'getvar': case 'allvar':
 			{
 				let variables = `
-    YouTube channel link : ${ytname}
-    Github profile : ${socialm}
-    Address : ${location}
-    Facebook profile: ${fbprofile}
-    Instagram profile: ${igprofile}
-    Telegram profile : ${tg}
-    Whatsapp number : ${walink}
-    Botname : ${botname}
-    Owner Name : ${ownername}
-    Owner Number : ${ownernumber}
-    Website : ${websitex}
-    Whatsapp Group : ${wagc}
-    Theme emoji : ${themeemoji}
-    Owner reaction : ${owner_react}
-    Repo link : ${botscript}
-    Sticker pack name : ${packname}
-    Sticker Author name : ${author}
-    Creater : ${creater}
-    Prefix : ${xprefix}
-    Premium User : ${premium}
-    Menu type : ${typemenu}
-    Reply type : ${typereply}
-    Show welcome message : ${welcome}
-    Anticall : ${anticall}
-    Auto status view ${autoswview}`
+1. 𝐘𝐨𝐮𝐓𝐮𝐛𝐞 𝐜𝐡𝐚𝐧𝐧𝐞𝐥 𝐥𝐢𝐧𝐤 : ${ytname}
+2. 𝐆𝐢𝐭𝐡𝐮𝐛 𝐩𝐫𝐨𝐟𝐢𝐥𝐞 : ${socialm}
+3. 𝐀𝐝𝐝𝐫𝐞𝐬𝐬 : ${location}
+4. 𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤 𝐩𝐫𝐨𝐟𝐢𝐥𝐞 : ${fbprofile}
+5. 𝐈𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐩𝐫𝐨𝐟𝐢𝐥𝐞 : ${igprofile}
+6. 𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦 𝐩𝐫𝐨𝐟𝐢𝐥𝐞 : ${tg}
+7. 𝐖𝐡𝐚𝐭𝐬𝐚𝐩𝐩 𝐧𝐮𝐦𝐛𝐞𝐫 : ${walink}
+8. 𝐓𝐡𝐮𝐦𝐛𝐧𝐚𝐢𝐥 𝐈𝐦𝐚𝐠𝐞 : ${thumbimage_url}
+9. 𝐁𝐨𝐭𝐧𝐚𝐦𝐞 : ${botname}
+10. 𝐎𝐰𝐧𝐞𝐫 𝐍𝐚𝐦𝐞 : ${ownername}
+11. 𝐎𝐰𝐧𝐞𝐫 𝐍𝐮𝐦𝐛𝐞𝐫 : ${ownernumber.split('@')[0]}
+12. 𝐖𝐞𝐛𝐬𝐢𝐭𝐞 : ${websitex}
+13. 𝐖𝐡𝐚𝐭𝐬𝐚𝐩𝐩 𝐆𝐫𝐨𝐮𝐩 : ${wagc}
+14. 𝐓𝐡𝐞𝐦𝐞 𝐞𝐦𝐨𝐣𝐢 : ${themeemoji}
+15. 𝐎𝐰𝐧𝐞𝐫 𝐫𝐞𝐚𝐜𝐭𝐢𝐨𝐧 : ${owner_react}
+16. 𝐑𝐞𝐩𝐨 𝐥𝐢𝐧𝐤 : ${botscript}
+17. 𝐒𝐭𝐢𝐜𝐤𝐞𝐫 𝐩𝐚𝐜𝐤 𝐧𝐚𝐦𝐞 : ${packname}
+18. 𝐒𝐭𝐢𝐜𝐤𝐞𝐫 𝐀𝐮𝐭𝐡𝐨𝐫 𝐧𝐚𝐦𝐞 : ${author}
+19. 𝐂𝐫𝐞𝐚𝐭𝐞𝐫 : ${creator}
+20. 𝐏𝐫𝐞𝐟𝐢𝐱 : ${xprefix}
+21. 𝐏𝐫𝐞𝐦𝐢𝐮𝐦 𝐔𝐬𝐞𝐫 : ${premium}
+22. 𝐌𝐞𝐧𝐮 𝐭𝐲𝐩𝐞 : ${typemenu}
+23. 𝐑𝐞𝐩𝐥𝐲 𝐭𝐲𝐩𝐞 : ${typereply}
+24. 𝐒𝐡𝐨𝐰 𝐰𝐞𝐥𝐜𝐨𝐦𝐞 𝐦𝐞𝐬𝐬𝐚𝐠𝐞 : ${welcome}
+25. 𝐀𝐧𝐭𝐢𝐜𝐚𝐥𝐥 : ${anticall}
+26. 𝐀𝐮𝐭𝐨 𝐬𝐭𝐚𝐭𝐮𝐬 𝐯𝐢𝐞𝐰 : ${autoswview}`
 		
     XeonBotInc.sendMessage(from, { text : variables}, {quoted : m})
 			
