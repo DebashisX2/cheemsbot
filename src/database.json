@@ -1,12 +1,4 @@
 {
-  "sticker": {},
-  "database": {},
-  "game": {
-    "math": []
-  },
-  "others": {
-    "vote": []
-  },
   "users": {
     "919366316018@s.whatsapp.net": {
       "serialNumber": "5748ef2731f9b0ab993964d915670166",
@@ -293,8 +285,20 @@
       "premium": false,
       "limit": 100,
       "totalLimit": 0
+    },
+    "919123876692@s.whatsapp.net": {
+      "serialNumber": "aff69e5401f5c93f3c74b74d4fc7cd42",
+      "title": "User",
+      "afkTime": -1,
+      "badword": 0,
+      "afkReason": "",
+      "nick": "𝕴𝖙𝖘_𝖆𝖇𝖎𝖗",
+      "premium": "false",
+      "limit": 100,
+      "totalLimit": 0
     }
   },
+  "database": {},
   "chats": {
     "120363047626537933@g.us": {
       "badword": false,
@@ -454,7 +458,8 @@
       "anticontact": false,
       "antilink": false,
       "antipromotion": false,
-      "antilinkgc": false
+      "antilinkgc": false,
+      "antipromote": false
     },
     "919366316018@s.whatsapp.net": {
       "badword": false,
@@ -684,6 +689,9 @@
       "antilinkgc": false
     }
   },
+  "game": {
+    "math": []
+  },
   "settings": {
     "919366316018@s.whatsapp.net": {
       "totalhit": 250,
@@ -814,7 +822,7 @@
       }
     },
     "15202238877@s.whatsapp.net": {
-      "totalhit": 349,
+      "totalhit": 400,
       "totalError": 0,
       "online": false,
       "autosticker": false,
@@ -846,6 +854,10 @@
       }
     }
   },
+  "message": {},
   "antipromote": {},
-  "message": {}
+  "sticker": {},
+  "others": {
+    "vote": []
+  }
 }
