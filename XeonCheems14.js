@@ -402,8 +402,16 @@ caption: `${dgxeon + xeontext1}`,
 
 async function reaction()
 {
-  
+  let react = randomreact[Math.floor(Math.random() * randomreact.length)]
+  await XeonBotInc.sendMessage(m.chat, { react: { text: `${react}`, key: m.key }})
 }
+async function reaction_animal()
+{
+
+  let react = randomreact2[Math.floor(Math.random() * randomreact2.length)]
+  await XeonBotInc.sendMessage(m.chat, { react: { text: `${react}`, key: m.key }})
+}
+
         //reply
         async function replygcxeon(teks) {
             if (typereply === 'v1') {
@@ -1848,8 +1856,7 @@ if (m.sender != botnumber)
               }
           else 
           {
-            let react = randomreact[Math.floor(Math.random() * randomreact.length)]
-              await XeonBotInc.sendMessage(m.chat, { react: { text: `${react}`, key: m.key }})
+            await reaction()
           }
         }
       
