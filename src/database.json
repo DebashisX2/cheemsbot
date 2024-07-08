@@ -296,6 +296,28 @@
       "premium": "false",
       "limit": 100,
       "totalLimit": 0
+    },
+    "15202268780@s.whatsapp.net": {
+      "serialNumber": "54c3bee174118f6361a4a4ed1e47e618",
+      "title": "Premium",
+      "afkTime": -1,
+      "badword": 0,
+      "afkReason": "",
+      "nick": "+1 520-226-8780",
+      "premium": "true",
+      "limit": 1000,
+      "totalLimit": 0
+    },
+    "61480003907@s.whatsapp.net": {
+      "serialNumber": "5ac4f4ea5b0c4bdb9c0c1b41f2fc8505",
+      "title": "Premium",
+      "afkTime": -1,
+      "badword": 0,
+      "afkReason": "",
+      "nick": "+61 480 003 907",
+      "premium": "true",
+      "limit": 1000,
+      "totalLimit": 0
     }
   },
   "database": {},
@@ -687,6 +709,48 @@
       "antilink": false,
       "antipromotion": false,
       "antilinkgc": false
+    },
+    "15202268780@s.whatsapp.net": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": true,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false
+    },
+    "61480003907@s.whatsapp.net": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": true,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false
     }
   },
   "game": {
@@ -850,6 +914,66 @@
         "owner": {
           "nick": "+91 69091 37213",
           "alias": "916909137213"
+        }
+      }
+    },
+    "15202268780@s.whatsapp.net": {
+      "totalhit": 5,
+      "totalError": 0,
+      "online": false,
+      "autosticker": false,
+      "autodownload": false,
+      "autobio": false,
+      "autoread": false,
+      "autoblocknum": false,
+      "onlyindia": false,
+      "onlyindo": false,
+      "onlygrub": false,
+      "onlypc": false,
+      "autorecordtype": false,
+      "autorecord": false,
+      "autotype": false,
+      "watermark": {
+        "packname": "Sticker By",
+        "author": "Debashis Dey"
+      },
+      "about": {
+        "bot": {
+          "nick": "+1 520-226-8780",
+          "alias": "꧁﴿»✥«·-𝕯𝕯 𝕮𝖍𝖊𝖊𝖒𝖘-𝕭𝖔𝖙-·»✥«﴾꧂"
+        },
+        "owner": {
+          "alias": "919339619072@s.whatsapp.net"
+        }
+      }
+    },
+    "61480003907@s.whatsapp.net": {
+      "totalhit": 26,
+      "totalError": 0,
+      "online": false,
+      "autosticker": false,
+      "autodownload": false,
+      "autobio": false,
+      "autoread": false,
+      "autoblocknum": false,
+      "onlyindia": false,
+      "onlyindo": false,
+      "onlygrub": false,
+      "onlypc": false,
+      "autorecordtype": false,
+      "autorecord": false,
+      "autotype": false,
+      "watermark": {
+        "packname": "Sticker By",
+        "author": "Debashis Dey"
+      },
+      "about": {
+        "bot": {
+          "nick": "+61 480 003 907",
+          "alias": "꧁﴿»✥«·-𝕯𝕯 𝕮𝖍𝖊𝖊𝖒𝖘-𝕭𝖔𝖙-·»✥«﴾꧂"
+        },
+        "owner": {
+          "alias": "919339619072@s.whatsapp.net"
         }
       }
     }

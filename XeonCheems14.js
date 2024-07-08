@@ -397,6 +397,13 @@ caption: `${dgxeon + xeontext1}`,
     if ('contextInfo' in message) generate.message[type2].contextInfo = message?.contextInfo
     return await XeonBotInc.relayMessage(chatId, generate.message, { messageId: generate.key.id })
 }
+
+//reactiom function
+
+async function reaction()
+{
+  
+}
         //reply
         async function replygcxeon(teks) {
             if (typereply === 'v1') {
@@ -1785,7 +1792,6 @@ click https://wa.me/${botNumber.split`@`[0]}`, m, { mentions: [roof.p, roof.p2] 
 	    delete this.suit[roof.id]
 	    }
 	    } //end
-        
         //user db
         if (isCommand && !isUser) {
 xeonverifieduser.push(sender)
@@ -18094,109 +18100,116 @@ replygcxeon(teks)
 }
 break
 case 'instagram': case 'ig': case 'igvideo': case 'igimage': case 'igvid': case 'igimg': {
-	  if (!text) return replygcxeon(`You need to give the URL of Any Instagram video, post, reel, image`)
-  let res
-  try {
-    res = await fetch(`https://www.guruapi.tech/api/igdlv1?url=${text}`)
-  } catch (error) {
-    return replygcxeon(`An error occurred: ${error.message}`)
+  if (!text)  {
+    replygcxeon(`Link`)}
+  else{
+let res
+try {
+  res = await fetch(`https://www.guruapi.tech/api/igdlv1?url=${text}`)
+} catch (error) {
+  return replygcxeon(`An error occurred: ${error.message}`)
+}
+await XeonBotInc.sendMessage(m.chat, { react: { text: `⬇️`, key: m.key }})
+let api_response = await res.json()
+if (!api_response || !api_response.data) {
+  return replygcxeon(`No video or image found or Invalid response from API.`)
+}
+const mediaArray = api_response.data;
+for (const mediaData of mediaArray) {
+  const mediaType = mediaData.type
+  const mediaURL = mediaData.url_download
+  let cap = `HERE IS THE ${mediaType.toUpperCase()}`
+  if (mediaType === 'video') {
+    let msgs = generateWAMessageFromContent(m.chat, {
+viewOnceMessage: {
+  message: {
+      "messageContextInfo": {
+        "deviceListMetadata": {},
+        "deviceListMetadataVersion": 2
+      },
+      interactiveMessage: proto.Message.InteractiveMessage.create({
+        body: proto.Message.InteractiveMessage.Body.create({
+          text: cap
+        }),
+        footer: proto.Message.InteractiveMessage.Footer.create({
+          text: botname
+        }),
+        header: proto.Message.InteractiveMessage.Header.create({
+        hasMediaAttachment: false,
+        ...await prepareWAMessageMedia({ video: {url: mediaURL}}, { upload: XeonBotInc.waUploadToServer })
+        }),
+        nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
+          buttons: [{
+          "name": "quick_reply",
+            "buttonParamsJson": `{\"display_text\":\"Good\",\"id\":\""}`
+            
+          },
+          {
+            "name": "cta_url",
+            "buttonParamsJson": `{"display_text":"Visit","url":'${text}',"merchant_url":"https://www.google.com"}`
+          }
+        ],
+        }), 
+        contextInfo: {
+                mentionedJid: [m.sender], 
+                forwardingScore: 999,
+                isForwarded: true,
+              forwardedNewsletterMessageInfo: {
+                newsletterJid: '120363222395675670@newsletter',
+                newsletterName: ownername,
+                serverMessageId: 143
+              }
+              }
+     })
   }
-  await XeonBotInc.sendMessage(m.chat, { react: { text: `⬇️`, key: m.key }})
-  let api_response = await res.json()
-  if (!api_response || !api_response.data) {
-    return replygcxeon(`No video or image found or Invalid response from API.`)
-  }
-  const mediaArray = api_response.data;
-  for (const mediaData of mediaArray) {
-    const mediaType = mediaData.type
-    const mediaURL = mediaData.url_download
-    let cap = `HERE IS THE ${mediaType.toUpperCase()}`
-    if (mediaType === 'video') {
-    	let msgs = generateWAMessageFromContent(m.chat, {
-  viewOnceMessage: {
-    message: {
-        "messageContextInfo": {
-          "deviceListMetadata": {},
-          "deviceListMetadataVersion": 2
-        },
-        interactiveMessage: proto.Message.InteractiveMessage.create({
-          body: proto.Message.InteractiveMessage.Body.create({
-            text: cap
-          }),
-          footer: proto.Message.InteractiveMessage.Footer.create({
-            text: botname
-          }),
-          header: proto.Message.InteractiveMessage.Header.create({
-          hasMediaAttachment: false,
-          ...await prepareWAMessageMedia({ video: {url: mediaURL}}, { upload: XeonBotInc.waUploadToServer })
-          }),
-          nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
-            buttons: [{
-            "name": "quick_reply",
-              "buttonParamsJson": `{\"display_text\":\"NICE ✨\",\"id\":\""}`
-            }
-          ],
-          }), 
-          contextInfo: {
-                  mentionedJid: [m.sender], 
-                  forwardingScore: 999,
-                  isForwarded: true,
-                forwardedNewsletterMessageInfo: {
-                  newsletterJid: '120363222395675670@newsletter',
-                  newsletterName: ownername,
-                  serverMessageId: 143
-                }
-                }
-       })
-    }
-  }
+}
 }, { quoted: m })
 await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key: m.key }})
 await XeonBotInc.relayMessage(m.chat, msgs.message, {})
 
-    } else if (mediaType === 'image') {
-    	let msgs = generateWAMessageFromContent(m.chat, {
-  viewOnceMessage: {
-    message: {
-        "messageContextInfo": {
-          "deviceListMetadata": {},
-          "deviceListMetadataVersion": 2
-        },
-        interactiveMessage: proto.Message.InteractiveMessage.create({
-          body: proto.Message.InteractiveMessage.Body.create({
-            text: cap
-          }),
-          footer: proto.Message.InteractiveMessage.Footer.create({
-            text: botname
-          }),
-          header: proto.Message.InteractiveMessage.Header.create({
-          hasMediaAttachment: false,
-          ...await prepareWAMessageMedia({ image: {url: mediaURL}}, { upload: XeonBotInc.waUploadToServer })
-          }),
-          nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
-            buttons: [{
-            "name": "quick_reply",
-              "buttonParamsJson": `{\"display_text\":\"Nice ✨\",\"id\":\""}`
-            }],
-          }), 
-          contextInfo: {
-                  mentionedJid: [m.sender], 
-                  forwardingScore: 999,
-                  isForwarded: true,
-                forwardedNewsletterMessageInfo: {
-                  newsletterJid: '120363222395675670@newsletter',
-                  newsletterName: ownername,
-                  serverMessageId: 143
-                }
-                }
-       })
-    }
-  }
-}, { quoted: m })
-return await XeonBotInc.relayMessage(m.chat, msgs.message, {})
-    }
+  } else if (mediaType === 'image') {
+    let msgs = generateWAMessageFromContent(m.chat, {
+viewOnceMessage: {
+  message: {
+      "messageContextInfo": {
+        "deviceListMetadata": {},
+        "deviceListMetadataVersion": 2
+      },
+      interactiveMessage: proto.Message.InteractiveMessage.create({
+        body: proto.Message.InteractiveMessage.Body.create({
+          text: cap
+        }),
+        footer: proto.Message.InteractiveMessage.Footer.create({
+          text: botname
+        }),
+        header: proto.Message.InteractiveMessage.Header.create({
+        hasMediaAttachment: false,
+        ...await prepareWAMessageMedia({ image: {url: mediaURL}}, { upload: XeonBotInc.waUploadToServer })
+        }),
+        nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
+          buttons: [{
+          "name": "quick_reply",
+            "buttonParamsJson": `{\"display_text\":\"Nice ✨\",\"id\":\""}`
+          }],
+        }), 
+        contextInfo: {
+                mentionedJid: [m.sender], 
+                forwardingScore: 999,
+                isForwarded: true,
+              forwardedNewsletterMessageInfo: {
+                newsletterJid: '120363222395675670@newsletter',
+                newsletterName: ownername,
+                serverMessageId: 143
+              }
+              }
+     })
   }
 }
+}, { quoted: m })
+return await XeonBotInc.relayMessage(m.chat, msgs.message, {})
+  }
+}
+}}
 break
 case 'gimage':{
 if (!text) return replygcxeon(`Usage: ${prefix}gimage dgxeon github`);
@@ -20522,6 +20535,7 @@ case 'readmore': {
     XeonBotInc.sendMessage(m.chat, {text: l + readmore + r}, {quoted: m})
 }
 break;
+break
   case 'totalfeature':
         case 'totalfitur': 
         case 'totalcmd': 
@@ -21045,10 +21059,10 @@ viewOnceMessage: {
               "name": "cta_url",
               "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
             },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT 📝","id":"${prefix}script"}`
-           },
+            {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo}',"merchant_url":"https://www.google.com"}`
+            },
            
          ]
        
@@ -21597,14 +21611,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 })
 })
@@ -21809,14 +21823,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 }),
 contextInfo: {
@@ -22022,14 +22036,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+            {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo}',"merchant_url":"https://www.google.com"}`
+            },,
 ],
 })
 })
@@ -22169,14 +22183,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 }),
 contextInfo: {
@@ -22382,14 +22396,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+            {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo}',"merchant_url":"https://www.google.com"}`
+            },
 ],
 })
 })
@@ -22529,14 +22543,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+            {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo}',"merchant_url":"https://www.google.com"}`
+            },
 ],
 }),
 contextInfo: {
@@ -22742,14 +22756,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+            {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo}',"merchant_url":"https://www.google.com"}`
+            },
 ],
 })
 })
@@ -22889,14 +22903,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+            {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo}',"merchant_url":"https://www.google.com"}`
+            },
 ],
 }),
 contextInfo: {
@@ -23102,14 +23116,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 })
 })
@@ -23249,14 +23263,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 }),
 contextInfo: {
@@ -23462,14 +23476,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 })
 })
@@ -23609,14 +23623,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 }),
 contextInfo: {
@@ -23822,14 +23836,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 })
 })
@@ -24158,14 +24172,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 })
 })
@@ -24305,14 +24319,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 }),
 contextInfo: {
@@ -24518,14 +24532,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 })
 })
@@ -24665,14 +24679,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 }),
 contextInfo: {
@@ -24878,14 +24892,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 })
 })
@@ -25025,14 +25039,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 }),
 contextInfo: {
@@ -25238,14 +25252,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 })
 })
@@ -25385,14 +25399,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 }),
 contextInfo: {
@@ -25598,14 +25612,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 })
 })
@@ -25745,14 +25759,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 }),
 contextInfo: {
@@ -25958,14 +25972,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 })
 })
@@ -26105,14 +26119,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 }),
 contextInfo: {
@@ -26318,14 +26332,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 })
 })
@@ -26465,14 +26479,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 }),
 contextInfo: {
@@ -26678,14 +26692,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 })
 })
@@ -26825,14 +26839,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 }),
 contextInfo: {
@@ -27038,14 +27052,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 })
 })
@@ -27185,14 +27199,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 }),
 contextInfo: {
@@ -27398,14 +27412,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 })
 })
@@ -27545,14 +27559,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 }),
 contextInfo: {
@@ -27758,14 +27772,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 })
 })
@@ -27905,14 +27919,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 }),
 contextInfo: {
@@ -28118,14 +28132,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 })
 })
@@ -28265,14 +28279,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 }),
 contextInfo: {
@@ -28478,14 +28492,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 })
 })
@@ -28625,14 +28639,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 }),
 contextInfo: {
@@ -28838,14 +28852,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 })
 })
@@ -28985,14 +28999,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 }),
 contextInfo: {
@@ -29198,14 +29212,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 })
 })
@@ -29345,14 +29359,14 @@ buttons: [
 }]
 }`
   },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
- },
- {
-   "name": "quick_reply",
-   "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
- }
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
 ],
 }),
 contextInfo: {
