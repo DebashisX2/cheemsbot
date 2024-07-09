@@ -1874,10 +1874,9 @@ if (!fromMe)
             break
             case 'alive':
               {
-                await XeonBotInc.sendMessage(m.chat, { react: { text: `📡`, key: m.key }})
                 let q_alive = { key: 
                   { fromMe: false, 
-                    participant: `0@s.whatsapp.net`, 
+                    participant: m.sender, 
                     remoteJid: `status@broadcast` },
                    message: {extendedTextMessage: 
                             { text: `\nCheck Bot is Running Or Not 📡🛰️\n`}
