@@ -1248,10 +1248,12 @@ list.push({
 	    })
 	}
         //console log
-        if (isCommand) {
-            console.log(color(`\n< ================================================== >\n`, 'cyan'))
-            console.log(chalk.black(chalk.bgWhite(!isCommand ? '[ MESSAGE ]' : '[ COMMAND ]')), chalk.black(chalk.bgGreen(new Date)), chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('=> From'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> In'), chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
+        if(isCommand)
+            {
+              console.log(color(`\n✯─────────✯─────────✯─────────✯─────────✯\n`, 'cyan'))
+            console.log(chalk.white(chalk.bgWhite(!isCommand ? '[ MESSAGE ]' : '[ COMMAND ]')), chalk.redBright(chalk.bold('\n=> Date:-')), chalk.white(chalk(new Date)), chalk.bold(chalk.cyanBright('\n=> Command:-')), chalk.whiteBright(chalk.bgRed(budy || m.mtype)) + '\n' + chalk.bold(chalk.magenta('=> From:-')), chalk.green(pushname), chalk.bold(chalk.yellow('\n=> Sender:- ')) + chalk.green(m.sender.split("@")[0]) + '\n' + chalk.bold(chalk.blueBright('=> In')), chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
             global.db.data.settings[botNumber].totalhit += 1
+            console.log(color(`\n✯─────────✯─────────✯─────────✯─────────✯\n`, 'cyan'))
         }
 
         //antiviewonce
@@ -1904,6 +1906,13 @@ if (!fromMe)
                     }
                   },{quoted: q_alive}
                 )
+                XeonBotInc.sendMessage(m.chat, {
+                  audio: fs.readFileSync('./XeonMedia/audio/nomoskar.mp3'),
+                  mimetype: 'audio/mpeg',
+                  ptt: true
+              }, {
+                  quoted: m
+              })
                 await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key:m.key}})
               }
               break

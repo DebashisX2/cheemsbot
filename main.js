@@ -90,7 +90,7 @@ const {  state, saveCreds } =await useMultiFileAuthState(`./session`)
     const msgRetryCounterCache = new NodeCache() // for retry message, "waiting message"
     const XeonBotInc = makeWASocket({
         logger: pino({ level: 'silent' }),
-        printQRInTerminal: !pairingCode, // popping up QR in terminal log
+        printQRInTerminal: pairingCode, // popping up QR in terminal log
       browser: Browsers.windows('Firefox'), // for this issues https://github.com/WhiskeySockets/Baileys/issues/328
       patchMessageBeforeSending: (message) => {
             const requiresPatch = !!(
@@ -117,7 +117,7 @@ const {  state, saveCreds } =await useMultiFileAuthState(`./session`)
          creds: state.creds,
          keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "fatal" }).child({ level: "fatal" })),
       },
-      markOnlineOnConnect: true, // set false for offline
+      markOnlineOnConnect: isonline, // set false for offline
       generateHighQualityLinkPreview: true, // make high preview link
       getMessage: async (key) => {
             if (store) {
@@ -143,13 +143,13 @@ const {  state, saveCreds } =await useMultiFileAuthState(`./session`)
       if (!!phoneNumber) {
          phoneNumber = phoneNumber.replace(/[^0-9]/g, '')
 
-         if (!Object.keys(PHONENUMBER_MCC).some(v => phoneNumber.startsWith(v))) {
-            console.log(chalk.bgBlack(chalk.redBright("Start with country code of your WhatsApp Number, Example : +919339619072")))
-            process.exit(0)
-         }
-      } else {
-         phoneNumber = await question(chalk.bgBlack(chalk.greenBright(`Please type your WhatsApp number 😍\nFor example: +919339619072 : `)))
-         phoneNumber = phoneNumber.replace(/[^0-9]/g, '')
+        // if (!Object.keys(PHONENUMBER_MCC).some(v => phoneNumber.startsWith(v))) {
+        //    console.log(chalk.bgBlack(chalk.redBright("Start with country code of your WhatsApp Number, Example : +919339619072")))
+         //   process.exit(0)
+        // }
+     // } else {
+        // phoneNumber = await question(chalk.bgBlack(chalk.greenBright(`Please type your WhatsApp number 😍\nFor example: +919339619072 : `)))
+       //  phoneNumber = phoneNumber.replace(/[^0-9]/g, '')
 
          // Ask again when entering the wrong number
          if (!Object.keys(PHONENUMBER_MCC).some(v => phoneNumber.startsWith(v))) {
@@ -161,11 +161,11 @@ const {  state, saveCreds } =await useMultiFileAuthState(`./session`)
          }
       }
 
-      setTimeout(async () => {
-         let code = await XeonBotInc.requestPairingCode(phoneNumber)
-         code = code?.match(/.{1,4}/g)?.join("-") || code
-         console.log(chalk.black(chalk.bgGreen(`Your Pairing Code : `)), chalk.black(chalk.white(code)))
-      }, 3000)
+      // setTimeout(async () => {
+      //    let code = await XeonBotInc.requestPairingCode(phoneNumber)
+      //    code = code?.match(/.{1,4}/g)?.join("-") || code
+      //    console.log(chalk.black(chalk.bgGreen(`Your Pairing Code : `)), chalk.black(chalk.white(code)))
+      // }, 3000)
    }
    
    XeonBotInc.ev.on('connection.update', async (update) => {
