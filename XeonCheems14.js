@@ -1806,7 +1806,7 @@ xeonverifieduser.push(sender)
 fs.writeFileSync('./src/data/role/user.json', JSON.stringify(xeonverifieduser, null, 2))
 }
 
-if (m.sender != botnumber)
+if (!fromMe)
   {
       if(m.sender === ownernumber)
       {
@@ -1863,6 +1863,51 @@ if (m.sender != botnumber)
   }
 
         switch (isCommand) {
+          case 'emoji-send':
+            {
+              react = randomreact
+              for(let i=0; i<react.length;i++)
+              {
+                await XeonBotInc.sendMessage(from, {text : react[i]})
+              }
+            }
+            break
+            case 'alive':
+              {
+                await XeonBotInc.sendMessage(m.chat, { react: { text: `📡`, key: m.key }})
+                let q_alive = { key: 
+                  { fromMe: false, 
+                    participant: `0@s.whatsapp.net`, 
+                    remoteJid: `status@broadcast` },
+                   message: {extendedTextMessage: 
+                            { text: `\nCheck Bot is Running Or Not 📡🛰️\n`}
+                  }
+                }
+                let good_react =['😀','😃','😄','😁','😆','🥹','☺️','😊','😇','🙂','🙃','😉','😍','😌','🥰','😘','😗','😙','😚','😋','😛','😝','🤓','😎','🤩','🥳','🙂‍↕️','🥺','🤗','🤔','🫣','🤭','🫢','🫡','🤫','🫠','🤠','😺','🎃','💜','❤️','💚','🖤','♥️','🤎','❤️‍🩹','❣','💕','💝','🫀','💖','💗','❤️‍🔥','💜','💌']
+                let emoji = good_react[Math.floor(Math.random() * good_react.length)]
+              
+                XeonBotInc.sendMessage(from,
+                  {
+                    image : fs.readFileSync('./XeonMedia/ownerimage.png'),
+                    caption : alive,
+                    contextInfo:
+                    {
+                      externalAdReply:
+                      {
+                        showAdAttribution: true,
+                        title: `Hello ${pushname} ${emoji} \nThis is ${botname} 👑`,
+                        body: ownername,
+                        thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'),
+                        sourceUrl: wagc,
+                        mediaType: 1,
+                        renderLargerThumbnail: true
+                      }
+                    }
+                  },{quoted: q_alive}
+                )
+                await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key:m.key}})
+              }
+              break
 		case 'getvar': case 'allvar':
 			{
 				let variables = `
@@ -7081,10 +7126,10 @@ break
                   
                   let latensie = speed() - timestampe
                   let ping1 = [
-                    `PONG `,
-                    `PONG. `,
-                    `PONG.. `,
-                    `PONG... `,
+                    `PONG`,
+                    `PONG.`,
+                    `PONG..`,
+                    `PONG...`,
                   ]
                   let { key } = await XeonBotInc.sendMessage(from, {text: `PONG`}, {quoted: ping_quote})
                   for (let j = 0; j < 3; j++) {
@@ -20922,7 +20967,7 @@ let msg = generateWAMessageFromContent(m.chat, {
           let a = m.sender
           ppuser = await XeonBotInc.profilePictureUrl(a, 'image')
           } catch (err) {
-          ppuser = 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
+          ppuser = `https://i.pinimg.com/originals/b7/66/2c/b7662c5b4208bd19ac6cbbf46b255efb.jpg`
           }
           XeonWlcm = await getBuffer(ppuser)
 
@@ -21068,7 +21113,7 @@ viewOnceMessage: {
             },
             {
               "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo}',"merchant_url":"https://www.google.com"}`
+              "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
             },
            
          ]
@@ -21433,7 +21478,7 @@ sendSlide(m.chat, 'DD CHEEMS BOT MENU SLIDES', xmenu_oh, botname, slides);
 
 break
 case 'allmenu': {
-let xmenu_oh = `┌────❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖────┐
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
 │ Hi 👋 
 └┬❖  ${pushname} 
 │✑  ${xeonytimewisher} 😄
@@ -21618,14 +21663,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
-           },
+  
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 })
 })
@@ -21830,14 +21876,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
-           },
+    
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 }),
 contextInfo: {
@@ -21858,7 +21905,7 @@ messageId: msg.key.id
 }
 break
 case 'ownermenu': {
-let xmenu_oh = `┌────❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖────┐
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
 │ Hi 👋 
 └┬❖  ${pushname} 
 │✑  ${xeonytimewisher} 😄
@@ -22043,14 +22090,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-            {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo}',"merchant_url":"https://www.google.com"}`
-            },,
+ 
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 })
 })
@@ -22190,14 +22238,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
-           },
+    
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 }),
 contextInfo: {
@@ -22218,7 +22267,7 @@ messageId: msg.key.id
 }
 break
 case 'othermenu': {
-let xmenu_oh = `┌────❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖────┐
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
 │ Hi 👋 
 └┬❖  ${pushname} 
 │✑  ${xeonytimewisher} 😄
@@ -22550,14 +22599,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-            {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo}',"merchant_url":"https://www.google.com"}`
-            },
+    
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 }),
 contextInfo: {
@@ -22578,7 +22628,7 @@ messageId: msg.key.id
 }
 break
 case 'downloadmenu': {
-let xmenu_oh = `┌────❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖────┐
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
 │ Hi 👋 
 └┬❖  ${pushname} 
 │✑  ${xeonytimewisher} 😄
@@ -22910,14 +22960,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-            {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo}',"merchant_url":"https://www.google.com"}`
-            },
+    
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 }),
 contextInfo: {
@@ -22938,7 +22989,7 @@ messageId: msg.key.id
 }
 break
 case 'groupmenu': {
-let xmenu_oh = `┌────❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖────┐
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
 │ Hi 👋 
 └┬❖  ${pushname} 
 │✑  ${xeonytimewisher} 😄
@@ -23270,14 +23321,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
-           },
+   
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 }),
 contextInfo: {
@@ -23298,7 +23350,7 @@ messageId: msg.key.id
 }
 break
 case 'gamemenu': {
-let xmenu_oh = `┌────❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖────┐
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
 │ Hi 👋 
 └┬❖  ${pushname} 
 │✑  ${xeonytimewisher} 😄
@@ -23630,14 +23682,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
-           },
+    
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 }),
 contextInfo: {
@@ -23658,7 +23711,7 @@ messageId: msg.key.id
 }
 break
 case 'funmenu': {
-let xmenu_oh = `┌────❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖────┐
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
 │ Hi 👋 
 └┬❖  ${pushname} 
 │✑  ${xeonytimewisher} 😄
@@ -23843,14 +23896,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
-           },
+    
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 })
 })
@@ -23994,7 +24048,7 @@ messageId: msg.key.id
 }
 break
 case 'stalkermenu': {
-let xmenu_oh = `┌────❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖────┐
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
 │ Hi 👋 
 └┬❖  ${pushname} 
 │✑  ${xeonytimewisher} 😄
@@ -24241,14 +24295,15 @@ message: {
 "name": "quick_reply",
 "buttonParamsJson": `{"display_text":"Allmenu 🗂️","id":"${prefix}allmenu"}`
 },
-  {
-    "name": "quick_reply",
-    "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
-  },
-  {
-    "name": "quick_reply",
-    "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
-  }
+ 
+            {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+            {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+            },
                       ],
     }),
     contextInfo: {
@@ -24326,14 +24381,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
-           },
+    
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 }),
 contextInfo: {
@@ -24354,7 +24410,7 @@ messageId: msg.key.id
 }
 break
 case 'randomphotomenu': {
-let xmenu_oh = `┌────❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖────┐
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
 │ Hi 👋 
 └┬❖  ${pushname} 
 │✑  ${xeonytimewisher} 😄
@@ -24686,14 +24742,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
-           },
+   
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 }),
 contextInfo: {
@@ -24714,7 +24771,7 @@ messageId: msg.key.id
 }
 break
 case 'randomvideomenu': {
-let xmenu_oh = `┌────❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖────┐
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
 │ Hi 👋 
 └┬❖  ${pushname} 
 │✑  ${xeonytimewisher} 😄
@@ -25046,14 +25103,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
-           },
+ 
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 }),
 contextInfo: {
@@ -25074,7 +25132,7 @@ messageId: msg.key.id
 }
 break
 case 'photooxymenu': {
-let xmenu_oh = `┌────❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖────┐
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
 │ Hi 👋 
 └┬❖  ${pushname} 
 │✑  ${xeonytimewisher} 😄
@@ -25259,14 +25317,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
-           },
+   
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 })
 })
@@ -25406,14 +25465,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
-           },
+    
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 }),
 contextInfo: {
@@ -25434,7 +25494,7 @@ messageId: msg.key.id
 }
 break
 case 'nsfwmenu': {
-let xmenu_oh = `┌────❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖────┐
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
 │ Hi 👋 
 └┬❖  ${pushname} 
 │✑  ${xeonytimewisher} 😄
@@ -25766,14 +25826,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
-           },
+    
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 }),
 contextInfo: {
@@ -25794,7 +25855,7 @@ messageId: msg.key.id
 }
 break
 case 'animemenu': {
-let xmenu_oh = `┌────❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖────┐
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
 │ Hi 👋 
 └┬❖  ${pushname} 
 │✑  ${xeonytimewisher} 😄
@@ -26126,14 +26187,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
-           },
+    
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 }),
 contextInfo: {
@@ -26154,7 +26216,7 @@ messageId: msg.key.id
 }
 break
 case 'stickermenu': {
-let xmenu_oh = `┌────❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖────┐
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
 │ Hi 👋 
 └┬❖  ${pushname} 
 │✑  ${xeonytimewisher} 😄
@@ -26486,14 +26548,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
-           },
+    
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 }),
 contextInfo: {
@@ -26514,7 +26577,7 @@ messageId: msg.key.id
 }
 break
 case 'databasemenu': {
-let xmenu_oh = `┌────❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖────┐
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
 │ Hi 👋 
 └┬❖  ${pushname} 
 │✑  ${xeonytimewisher} 😄
@@ -26846,14 +26909,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
-           },
+   
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 }),
 contextInfo: {
@@ -26874,7 +26938,7 @@ messageId: msg.key.id
 }
 break
 case 'searchmenu': {
-let xmenu_oh = `┌────❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖────┐
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
 │ Hi 👋 
 └┬❖  ${pushname} 
 │✑  ${xeonytimewisher} 😄
@@ -27206,14 +27270,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
-           },
+
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 }),
 contextInfo: {
@@ -27234,7 +27299,7 @@ messageId: msg.key.id
 }
 break
 case 'storemenu': {
-let xmenu_oh = `┌────❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖────┐
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
 │ Hi 👋 
 └┬❖  ${pushname} 
 │✑  ${xeonytimewisher} 😄
@@ -27566,14 +27631,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
-           },
+    
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 }),
 contextInfo: {
@@ -27594,7 +27660,7 @@ messageId: msg.key.id
 }
 break
 case 'aimenu': {
-let xmenu_oh = `┌────❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖────┐
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
 │ Hi 👋 
 └┬❖  ${pushname} 
 │✑  ${xeonytimewisher} 😄
@@ -27926,14 +27992,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
-           },
+    
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 }),
 contextInfo: {
@@ -27954,7 +28021,7 @@ messageId: msg.key.id
 }
 break
 case 'religionmenu': {
-let xmenu_oh = `┌────❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖────┐
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
 │ Hi 👋 
 └┬❖  ${pushname} 
 │✑  ${xeonytimewisher} 😄
@@ -28286,14 +28353,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
-           },
+    
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 }),
 contextInfo: {
@@ -28314,7 +28382,7 @@ messageId: msg.key.id
 }
 break
 case 'listmenu': {
-let xmenu_oh = `┌────❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖────┐
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
 │ Hi 👋 
 └┬❖  ${pushname} 
 │✑  ${xeonytimewisher} 😄
@@ -28646,14 +28714,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
-           },
+    
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 }),
 contextInfo: {
@@ -28674,7 +28743,7 @@ messageId: msg.key.id
 }
 break
 case 'convertmenu': {
-let xmenu_oh = `┌────❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖────┐
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
 │ Hi 👋 
 └┬❖  ${pushname} 
 │✑  ${xeonytimewisher} 😄
@@ -29006,14 +29075,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
-           },
+  
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 }),
 contextInfo: {
@@ -29034,7 +29104,7 @@ messageId: msg.key.id
 }
 break
 case 'bugmenu': {
-let xmenu_oh = `┌────❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖────┐
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
 │ Hi 👋 
 └┬❖  ${pushname} 
 │✑  ${xeonytimewisher} 😄
@@ -29366,14 +29436,15 @@ buttons: [
 }]
 }`
   },
-    {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-           {
-             "name": "quick_reply",
-             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
-           },
+ 
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
 ],
 }),
 contextInfo: {
