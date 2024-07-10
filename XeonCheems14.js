@@ -21064,12 +21064,7 @@ viewOnceMessage: {
               "name": "cta_url",
               "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
             },
-            {
-              name: quick_reply,
-                buttonParamsJson: {display_text:`Next ➡️`, id:`${prefix + command}`}
-              }
-           
-         ]
+     ]
        
         }),
         contextInfo: {  
