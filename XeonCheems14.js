@@ -429,11 +429,6 @@ emojisToExtract
 // Example usage:
 let inputText = "Hello! 😊 How are you? 🌍";
 let emojisToExtract = ["😊", "🌍", "😃"]; // Define the emojis you want to extract
-
-let extractedEmoji = extractDefinedEmojis(inputText, emojisToExtract);
-console.log("Extracted emoji:", extractedEmoji);
-
-
         //reply
         async function replygcxeon(teks) {
             if (typereply === 'v1') {
