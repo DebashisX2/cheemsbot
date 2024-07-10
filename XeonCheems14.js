@@ -151,6 +151,15 @@ const wkwk = fs.readFileSync(`./src/data/function/XBug/x.mp3`)
 const xsteek = fs.readFileSync(`./src/data/function/XBug/x.webp`)
 const {menuimg1} = fs.readFileSync(`./XeonMedia/theme/cheemspic.jpg`)
 
+//owner-images
+const ownerimage1 = fs.readFileSync('./XeonMedia/owner_images/ownerimage1.png')
+const ownerimage2 = fs.readFileSync('./XeonMedia/owner_images/ownerimage2.png')
+const ownerimage3 = fs.readFileSync('./XeonMedia/owner_images/ownerimage3.png')
+const ownerimage4 = fs.readFileSync('./XeonMedia/owner_images/ownerimage4.jpg')
+const ownerimage5 = fs.readFileSync('./XeonMedia/owner_images/ownerimage5.png')
+
+const ownerimages = [ownerimage1, ownerimage2, ownerimage3, ownerimage4, ownerimage5]
+
 //store database
 const db_respon_list = JSON.parse(fs.readFileSync('./src/store/list.json'))
 
@@ -173,6 +182,9 @@ let vote = db.data.others.vote = []
 let kuismath = db.data.game.math = []
 
 // reaction emojies
+
+global.randomreact =['😀','😃','😄','😁','😆','🥹','😅','😂','🤣','🥲','☺️','😊','😇','🙂','🙃','😉','😌','😍','🥰','😘','😗','😙','😚','😋','😛','😝','😜','🤪','🤨','🧐','🤓','😎','🥸','🤩','🥳','🙂‍↕️','😏','😒','🙂‍↔️','😞','😔','😟','😕','🙁','☹️','😣','😡','😠','😤','😭','😢','😫','🥺','😩','😖','🤬','😓','🤯','😥','😳','😰','🥵','😨','🥶','😱','😶‍🌫','🤗','🤔','🫣','🤭','🫢','🫡','🤫','🫠','🤥','😶','🫥','😐','🥱','🫤','😴','😑','🤤','🫨','😪','😬','😮‍💨','🙄','😵','😯','😵‍💫','😦','🤐','😧','🥴','😮','🤢','😲','🤮','🤧','😷','🤒','🤕','🤑','🤠','😈','👿','👹','👺','🤡','💩','😻','👻','😼','💀','😽','☠️','🙀','👽','😿','👾','😾','🤖','🫶','🎃','🤲','😺','👐','😸','🙌','😹','👏','🤝','✌️','🫰','👆','🤟','👉','👍','🤞','👎','🫸','🤘','👈','👌','🫴','👊','🫷','✊','🤜','🤌','🫳','🤛','🤏','👇','🦾','☝️','🖕','✋','✍️','🤚','🙏','🖐','🫵','🖖','🦶','👋','🦵','🤙','🦿','🫲','💄','🫱','💋','💪','👄','🫦','🧠','🦷','👤','👅','🗣','👂','👥','🦻','🫂','👃','👶','👣','👧','👁','🧒','👀','👦','🫀','👩','🫁','🧑','👩‍🦳','👱‍♂','👱','👱‍♀','👨‍🦰','🧑‍🦰','👩‍🦰','👨‍🦱','🧑‍🦱','👩‍🦱','👨','🧑‍🦳','👨‍🦳','👩‍🦲','🧑‍🦲','👨‍🦲','🧔‍♀','🧔','🧔‍♂','👵','🧓','👴','👲','💂‍♀','👳‍♀','💂','👳','💂‍♂','👳‍♂','🕵‍♀','🧕','🕵️','👮‍♀','🕵‍♂','👮','👩‍⚕','👮‍♂','🧑‍⚕','👷‍♀','👨‍⚕','👷','👩‍🌾','👷‍♂','🧑‍🌾','🥷','🦸‍♀','🦸','🦸‍♂','🦹‍♀','🦹','🦹‍♂','🤶','🧑‍🎄','🎅','🧙‍♀','🧙','🧙‍♂','🧝‍♀','🧝','🧝‍♂','🧌','🧛‍♀','🧛','🧛‍♂','🧟‍♀','🧟','🧟‍♂','🧞‍♀','🧞','🧞‍♂','🧜‍♀','🧜','🧜‍♂','🧚‍♀','🧚','🧚‍♂','👼','🤰','🫄','🫃','🤱','🙅‍♀','💁‍♂','💁','💁‍♀','🙇‍♂','🙇','🙇‍♀','👨‍🍼','🧑‍🍼','🙅','🙅‍♂','🙆‍♀','🙆','🙆‍♂','🙋‍♀','🙋','🙋‍♂','🧏‍♀','🧏','🧏‍♂','🙍','🙍‍♀','🙎‍♂','🙎','🙎‍♀','🤷‍♂','🤷','🤷‍♀','🤦‍♂','🤦','🤦‍♀','🙍‍♂','💇‍♀','💇','💇‍♂','💆‍♀','💆','💆‍♂','🧖‍♀','🧖','🧖‍♂','💅','🤳','💃','🕺','👯‍♀','👯','👯‍♂','🕴','👩‍🦽','🧑‍🦽','👨‍🦽','👩‍🦽‍➡️','🧍','👩‍❤️‍💋‍👩','👩‍❤️‍💋‍👨','👨‍❤️‍👨','💑','👩‍❤️‍👩','👩‍❤️‍👨','👬','👭','👫','🧍‍♂','🏃‍♀','🏃','🏃‍♂','🏃‍♀‍➡️','🏃‍➡️','🏃‍♂‍➡️','🧎‍♀‍➡️','🧍‍♀','💏','👨‍❤️‍💋‍👨','🪢','🧶','🧵','🪡','🧥','🥼','🦺','👚','👕','🥿','🩴','🥻','👘','🩱','👙','👗','👔','🩳','🩲','👖','👠','👡','👢','👞','👟','🥾','🧦','🧤','🧣','🎩','🧢','🎒','💼','👜','👛','👝','💍','👑','🪖','⛑','🎓','👒','🧳','👓','🕶','🥽','🌂']
+global.randomreact2 = ['🐶','🐱','🐭','🐹','🐰','🦊','🐻','🐼','🐻‍❄️','🐨','🐯','🦁','🐮','🐷','🐽','🐸','🐵','🙈','🙉','🙊','🐒','🐔','🐧','🐦','🐤','🐣','🐥','🪿','🦆','🐦‍⬛️','🦅','🦉','🦇','🐺','🐗','🐴','🦄','🫎','🐝','🪱','🐛','🦋','🐌','🐞','🐜','🪰','🪲','🦟','🪳','🦗','🕷','🕸','🦂','🐢','🐍','🦎','🦖','🦕','🐙','🦑','🪼','🦐','🦞','🦀','🐡','🐠','🐟','🐬','🐳','🐋','🦈','🦭','🐊','🐅','🐆','🦓','🦍','🐃','🦬','🦘','🦒','🐫','🐪','🦏','🦛','🐘','🦣','🦧','🐂','🐄','🫏','🐎','🐖','🐏','🐑','🦙','🐐','🦌','🐕','🦚','🦤','🦃','🐓','🪽','🪶','🐈‍⬛️','🐈','🐕‍🦺','🦮','🐩','🦜','🦢','🦩','🕊','🐇','🦝','🦨','🦡','🦫','🦦','🦥','🐁','🌳','🐀','🌴','🐿','🪵','🦔','🌱','🐾','🌿','🐉','☘','🐲','🍀','🐦‍🔥','🎍','🌵','🪴','🎄','🎋','🌲','🍃','🍂','🌷','🍁','🌹','🪺','🥀','🪹','🪻','🍄','🪷','🍄‍🟫','🌺','🐚','🌸','🪸','🌼','🪨','🌻','🌾','🌞','💐','🌝','🌛','🌜','🌚','🌕','🌖','🌗','🌘','🌑','🌒','🌓','🌔','🌙','🌎','🌍','🪐','💫','⭐️','🌟','✨','⚡️','☄','💥','🔥','🌪','🌈','☀️','🌤','⛅️','🌥','☁️','❄️','☃️','🌬','💨','💧','💦','🫧','☔️','☂','🌊','🌫']
 
 
 
@@ -221,6 +233,7 @@ module.exports = XeonBotInc = async (XeonBotInc, m, msg, chatUpdate, store) => {
   m.mtype === 'conversation' ? m.message.conversation :
   m.mtype === 'imageMessage' ? m.message.imageMessage.caption :
   m.mtype === 'videoMessage' ? m.message.videoMessage.caption :
+  m.mtype === 'emojimessage' ? m.message.includes(randomreact) :
   m.mtype === 'extendedTextMessage' ? m.message.extendedTextMessage.text :
   m.mtype === 'buttonsResponseMessage' ? m.message.buttonsResponseMessage.selectedButtonId :
   m.mtype === 'listResponseMessage' ? m.message.listResponseMessage.singleSelectReply.selectedRowId :
@@ -411,6 +424,15 @@ async function reaction_animal()
   let react = randomreact2[Math.floor(Math.random() * randomreact2.length)]
   await XeonBotInc.sendMessage(m.chat, { react: { text: `${react}`, key: m.key }})
 }
+emojisToExtract
+
+// Example usage:
+let inputText = "Hello! 😊 How are you? 🌍";
+let emojisToExtract = ["😊", "🌍", "😃"]; // Define the emojis you want to extract
+
+let extractedEmoji = extractDefinedEmojis(inputText, emojisToExtract);
+console.log("Extracted emoji:", extractedEmoji);
+
 
         //reply
         async function replygcxeon(teks) {
@@ -1251,7 +1273,7 @@ list.push({
         if(isCommand)
             {
               console.log(color(`\n✯─────────✯─────────✯─────────✯─────────✯\n`, 'cyan'))
-            console.log(chalk.white(chalk.bgWhite(!isCommand ? '[ MESSAGE ]' : '[ COMMAND ]')), chalk.redBright(chalk.bold('\n=> Date:-')), chalk.white(chalk(new Date)), chalk.bold(chalk.cyanBright('\n=> Command:-')), chalk.whiteBright(chalk.bgRed(budy || m.mtype)) + '\n' + chalk.bold(chalk.magenta('=> From:-')), chalk.green(pushname), chalk.bold(chalk.yellow('\n=> Sender:- ')) + chalk.green(m.sender.split("@")[0]) + '\n' + chalk.bold(chalk.blueBright('=> In')), chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
+            console.log(chalk.white(chalk.bgWhite(!isCommand ? '[ MESSAGE ]' : '[ COMMAND ]')), chalk.bgBlack(chalk.redBright(chalk.bold('\n=> Date:-'))), chalk.white(chalk.green(new Date)), chalk.bgBlack(chalk.bold(chalk.cyanBright('\n=> Command:-'))), chalk.green(chalk(budy || m.mtype)) + '\n' + chalk.bgBlack(chalk.bold(chalk.magenta('=> From:-'))), chalk.green(pushname), chalk.bgBlack(chalk.bold(chalk.yellow('\n=> Sender:- '))) + chalk.green(m.sender.split("@")[0]) + '\n' + chalk.bgBlack(chalk.bold(chalk.blueBright('=> In'))), chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
             global.db.data.settings[botNumber].totalhit += 1
             console.log(color(`\n✯─────────✯─────────✯─────────✯─────────✯\n`, 'cyan'))
         }
@@ -1807,7 +1829,11 @@ click https://wa.me/${botNumber.split`@`[0]}`, m, { mentions: [roof.p, roof.p2] 
 xeonverifieduser.push(sender)
 fs.writeFileSync('./src/data/role/user.json', JSON.stringify(xeonverifieduser, null, 2))
 }
-
+if(m.mtype === "emojimessage")
+{
+  XeonBotInc.sendMessage(from ,{ text: `this message contains emoji`})
+}
+if(reactall === true){
 if (!fromMe)
   {
       if(m.sender === ownernumber)
@@ -1863,8 +1889,32 @@ if (!fromMe)
         }
       
   }
+}
 
         switch (isCommand) {
+          case 'hping':
+            {
+              
+              XeonBotInc.sendMessage(from,{text : command.replace(prefix, '').slice(1).trim()})
+            }
+            break
+            
+        
+          case 'global-reation':
+            {
+              if(!XeonTheCreator) return XeonStickOwner()
+                if(argsa[0] === 'on')
+                  {
+                    reactions = true
+                    replygcxeon(`${command} is enabled`)
+                  }
+                  else ifif(argsa[0] === 'off') 
+                {
+                  reactions = false
+                  replygcxeon(`${command} is disabled`)
+                }
+            }
+            break
           case 'emoji-send':
             {
               react = randomreact
@@ -1881,15 +1931,24 @@ if (!fromMe)
                     participant: m.sender, 
                     remoteJid: `status@broadcast` },
                    message: {extendedTextMessage: 
-                            { text: `\nCheck Bot is Running Or Not 📡🛰️\n`}
+                            { text: `${botname} 🤖 \nCheck Bot is Running Or Not 📡🛰️`}
                   }
                 }
+                let alive_audio = { key: 
+                  { fromMe: false, 
+                    participant: m.sender, 
+                    remoteJid: `status@broadcast` },
+                   message: {extendedTextMessage: 
+                            { text: `Alive Response Audio Message 🎵\n ${botname}`}
+                  }
+                }
+                let imagesuffle  = ownerimages[Math.floor(Math.random() * ownerimages.length)]
                 let good_react =['😀','😃','😄','😁','😆','🥹','☺️','😊','😇','🙂','🙃','😉','😍','😌','🥰','😘','😗','😙','😚','😋','😛','😝','🤓','😎','🤩','🥳','🙂‍↕️','🥺','🤗','🤔','🫣','🤭','🫢','🫡','🤫','🫠','🤠','😺','🎃','💜','❤️','💚','🖤','♥️','🤎','❤️‍🩹','❣','💕','💝','🫀','💖','💗','❤️‍🔥','💜','💌']
                 let emoji = good_react[Math.floor(Math.random() * good_react.length)]
               
                 XeonBotInc.sendMessage(from,
                   {
-                    image : fs.readFileSync('./XeonMedia/ownerimage.png'),
+                    image : imagesuffle,
                     caption : alive,
                     contextInfo:
                     {
@@ -1911,7 +1970,7 @@ if (!fromMe)
                   mimetype: 'audio/mpeg',
                   ptt: true
               }, {
-                  quoted: m
+                  quoted: alive_audio
               })
                 await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key:m.key}})
               }
@@ -11894,7 +11953,6 @@ case 'buttons' :
                 text: botname
               }),
               header: proto.Message.InteractiveMessage.Header.create({
-                    ...(await prepareWAMessageMedia({ image : XeonWlcm}, { upload: XeonBotInc.waUploadToServer})), 
                       title: ``,
                       gifPlayback: true,
                       subtitle: ownername,
@@ -11903,122 +11961,10 @@ case 'buttons' :
               nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
                 buttons: [
                   {
-                    "name": "single_select",
-                    "buttonParamsJson": 
-      `{"title":"MENU 🌺",
-      "sections":[{"title":"${botname}",
-      "rows":[
-      {"header":"ALL MENU",
-      "title":"All fetures of this bot",
-      "id":"${prefix}allmenu"},
-      {"header":"SEARCH MENU",
-      "title":"Search Options",
-      "id":"${prefix}searchmenu"},
-      {"header":"DOWNLOAD MENU",
-      "title":"Download Options",
-      "id":"${prefix}downloadmenu"},
-      {"header":"GAME MENU",
-      "title":"Bot Games",
-      "id":"${prefix}gamemenu"},
-      {"header":"FUN MENU",
-      "title":"Funny functions",
-      "id":"${prefix}funmenu"},
-      {"header":"AI MENU",
-      "title":"AI Related Functions",
-      "id":"${prefix}aimenu"},
-      {"header":"GROUP MENU",
-      "title":"Group managing functions",
-      "id":"${prefix}groupmenu"},
-      {"header":"OWNER MENU",
-      "title":"Owner Controls",
-      "id":"${prefix}ownermenu"},
-      {"header":"CONVERT MENU",
-      "title":"Conversions Options",
-      "id":"${prefix}convertmenu"},
-      {"header":"LIST MENU",
-      "title":"click to display",
-      "description":"Listing Options",
-      "id":"${prefix}listmenu"},
-      {"header":"RELIGION MENU",
-      "title":"Religion related commands",
-      "id":"${prefix}religionmenu"},
-      {"header":"PHOTOXY MENU",
-      "title":"Photooxy Features",
-      "id":"${prefix}photooxymenu"},
-      {"header":"NSFW MENU",
-      "title":"NSFW Commands 😁",
-      "id":"${prefix}nsfwmenu"},
-      {"header":"ANIME MENU",
-      "title":"Anime Menu",
-      "id":"${prefix}animemenu"},
-      {"header":"RANDOM PHOTO MENU",
-      "title":"Generate random photos",
-      "id":"${prefix}randomphotomenu"},
-      {"header":"RANDOM VIDEO MENU",
-      "title":"Generate random photos",
-      "id":"${prefix}randomvideomenu"},
-      {"header":"STICKER MENU",
-      "title":"Sticker Options",
-      "id":"${prefix}stickermenu"},
-      {"header":"DATABASE MENU",
-      "title":"Database commands",
-      "id":"${prefix}databasemenu"},
-      {"header":"STORE MENU",
-      "title":"Store commands",
-      "id":"${prefix}storemenu"},
-      {"header":"STALKER MENU",
-      "title":"List Of Stalking Features",
-      "id":"${prefix}stalkermenu"},
-      {"header":"BUG MENU",
-      "title":"Bugs and Viruses",
-      "id":"${prefix}bugmenu"},
-      {"header":"OTHER MENU",
-      "title":"Other",
-      "id":"${prefix}othermenu"}]
-      }]
-      }`
-                  },
-      {
-                    "name": "single_select",
-                    "buttonParamsJson": 
-      `{"title":"MY PROFILES 📡",
-      "sections":[{"title":"${botname}",
-      "rows":[
-      {"header":"WHATSAPP CONTACT NUMBER",
-      "title":"WhatsApp",
-      "id":"${prefix}mywhatsapp"},
-      {"header":"FACEBOOK",
-      "title":"Follow me on Facebook",
-      "id":"${prefix}myfb"},
-      {"header":"INSTAGRAM",
-      "title":"Follow me on Instagram",
-      "id":"${prefix}myig"},
-      {"header":"GITHUB",
-      "title":"GitHub Profile",
-      "id":"${prefix}mygithub"},
-      {"header":"TELEGRAM",
-      "title":"Telegram",
-      "id":"${prefix}mytelegram"}]
-      }]
-      }`
-                  },
-                 {
-                   "name": "quick_reply",
-                   "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
-                 },
-                 {
-                  "name" : "cta_copy",
-                  "buttonParamsJson" : `{"display_text":"COPY SOMETHING","id":"","copy_code":"SAMPLE MESSAGE TO COPY"}`
-                 },
-                 {
-                  "name" : "cta_reminder",
-                  "buttonParamsJson" : `{"display_text" : "REMINDER MESSAGE" , "id" : "${owner}"}`
-                 },
-                 {"name": "send_location",
-                  "buttonParamsJson" : `{"display_text" : "LOCATION MESSAGE"}`
-                 }
-      
-                 
+                    "name": "quick_reply",
+                      "buttonParamsJson": `{\"display_text\":\"Next ➡️\",\"id\":\"${prefix + command}\"}`,
+                      "buttonParamsJson": `{\"display_text\":\"Next ➡️\",\"id\":\"${prefix + command}\"}`
+                    },   
                ]
              
               }),
@@ -20971,6 +20917,7 @@ let msg = generateWAMessageFromContent(m.chat, {
       messageId: msg.key.id
       })
       } else if (typemenu === 'v12') {
+        let imagesuffle  = ownerimages[Math.floor(Math.random() * ownerimages.length)]
         try {
           let a = m.sender
           ppuser = await XeonBotInc.profilePictureUrl(a, 'image')
@@ -21007,7 +20954,7 @@ viewOnceMessage: {
           text: botname
         }),
         header: proto.Message.InteractiveMessage.Header.create({
-              ...(await prepareWAMessageMedia({ image : XeonWlcm}, { upload: XeonBotInc.waUploadToServer})), 
+              ...(await prepareWAMessageMedia({ image : imagesuffle}, { upload: XeonBotInc.waUploadToServer})), 
                 title: ``,
                 gifPlayback: true,
                 subtitle: ownername,
@@ -21123,6 +21070,10 @@ viewOnceMessage: {
               "name": "cta_url",
               "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
             },
+            {
+              name: quick_reply,
+                buttonParamsJson: {display_text:`Next ➡️`, id:`${prefix + command}`}
+              }
            
          ]
        
@@ -25861,6 +25812,369 @@ messageId: msg.key.id
 })
 }
 }
+break
+case 'mymenu':
+  {
+    
+let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐
+│ Hi 👋 
+└┬❖  ${pushname} 
+│✑  ${xeonytimewisher} 😄
+┌┤✑ Use prefix ${prefix}
+│└────────────┈ ⳹
+│${mymenu(prefix, hituet)}`
+if (typemenu === 'v1') {
+        XeonBotInc.sendMessage(m.chat, {
+            image: fs.readFileSync('./XeonMedia/theme/thumb.png'),
+            caption: xmenu_oh
+        }, {
+            quoted: m
+        })
+    } else if (typemenu === 'v2') {
+        XeonBotInc.sendMessage(m.chat, {
+            text: xmenu_oh,
+            contextInfo: {
+                externalAdReply: {
+                    showAdAttribution: true,
+                    title: botname,
+                    body: ownername,
+                    thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'),
+                    sourceUrl: websitex,
+                    mediaType: 1,
+                    renderLargerThumbnail: true
+                }
+            }
+        }, {
+            quoted: m
+        })
+    }   if (typemenu === 'v3') {
+        XeonBotInc.sendMessage(m.chat, {
+            video: fs.readFileSync('./XeonMedia/theme/Cheems-bot.mp4'),
+            caption: xmenu_oh
+        }, {
+            quoted: m
+        })
+    } else if (typemenu === 'v4') {
+        XeonBotInc.sendMessage(m.chat, {
+            video: fs.readFileSync('./XeonMedia/theme/Cheems-bot.mp4'),
+            caption: xmenu_oh,
+            gifPlayback: true
+        }, {
+            quoted: m
+        })
+    } else if (typemenu === 'v5') {
+        XeonBotInc.relayMessage(m.chat, {
+            scheduledCallCreationMessage: {
+                callType: "AUDIO",
+                scheduledTimestampMs: 1200,
+                title: xmenu_oh
+            }
+        }, {})
+    } else if (typemenu === 'v6') {
+        XeonBotInc.relayMessage(m.chat,  {
+           requestPaymentMessage: {
+              currencyCodeIso4217: 'INR',
+              amount1000: '9999999900',
+              requestFrom: m.sender,
+              noteMessage: {
+                 extendedTextMessage: {
+                    text: xmenu_oh,
+                    contextInfo: {
+                       externalAdReply: {
+                           showAdAttribution: true
+                       }
+                    }
+                 }
+              }
+           }
+        }, {})
+    } else if (typemenu === 'v7') {
+        XeonBotInc.sendMessage(m.chat, {
+            document: {
+               url: 'https://i.ibb.co/2W0H9Jq/avatar-contact.png'
+            },
+            caption: xmenu_oh,
+            mimetype: 'application/zip',
+            fileName: ownername,
+            fileLength: "99999999999",
+            contextInfo: {
+                externalAdReply: {
+                    showAdAttribution: true,
+                    title: botname,
+                    body: ownername,
+                    thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'),
+                    sourceUrl: websitex,
+                    mediaType: 1,
+                    renderLargerThumbnail: true
+                }
+            }
+        }, {
+            quoted: fstatus 
+        })
+    } else if (typemenu === 'v8') {
+      XeonBotInc.sendMessage(m.chat, {
+video: fs.readFileSync('./XeonMedia/theme/Cheems-bot.mp4'),
+gifPlayback: true,
+caption: xmenu_oh,
+contextInfo: {
+externalAdReply: {
+title: botname,
+body: ownername,
+thumbnailUrl: thumbimage_url,
+sourceUrl: ``,
+mediaType: 1,
+renderLargerThumbnail: true
+}
+}
+}, {
+            quoted: m
+        })
+        } else if (typemenu === 'v9') {
+      XeonBotInc.sendMessage(m.chat, {
+video: fs.readFileSync('./XeonMedia/theme/Cheems-bot.mp4'),
+caption: xmenu_oh,
+gifPlayback: true,
+contextInfo: {
+forwardingScore: 999,
+isForwarded: true,
+mentionedJid: [sender],
+forwardedNewsletterMessageInfo: {
+newsletterName: ownername,
+newsletterJid: "120363222395675670@newsletter",
+},
+externalAdReply: {
+showAdAttribution: true,
+title: ownername,
+body: botname,
+thumbnailUrl: "https://assets.telegraphindia.com/abp/2022/Jun/1655905064_roddur.jpg",
+sourceUrl: websitex,
+mediaType: 1,
+renderLargerThumbnail: true
+}
+}
+}, {
+quoted: m
+})
+} else if (typemenu === 'v10') {
+let msg = generateWAMessageFromContent(from, {
+viewOnceMessage: {
+message: {
+"messageContextInfo": {
+"deviceListMetadata": {},
+"deviceListMetadataVersion": 2
+},
+interactiveMessage: proto.Message.InteractiveMessage.create({
+body: proto.Message.InteractiveMessage.Body.create({
+text: ownername
+}),
+footer: proto.Message.InteractiveMessage.Footer.create({
+text: botname
+}),
+header: proto.Message.InteractiveMessage.Header.create({
+title: xmenu_oh,
+subtitle: themeemoji,
+hasMediaAttachment: false
+}),
+nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
+buttons: [
+  {
+    "name": "single_select",
+    "buttonParamsJson": 
+`{"title":"MY PROFILES 📡",
+"sections":[{"title":"${botname}",
+"rows":[
+{"header":"WHATSAPP CONTACT NUMBER",
+"title":"WhatsApp",
+"id":"${prefix}mywhatsapp"},
+{"header":"FACEBOOK",
+"title":"Follow me on Facebook",
+"id":"${prefix}myfb"},
+{"header":"INSTAGRAM",
+"title":"Follow me on Instagram",
+"id":"${prefix}myig"},
+{"header":"GITHUB",
+"title":"GitHub Profile",
+"id":"${prefix}mygithub"},
+{"header":"TELEGRAM",
+"title":"Telegram",
+"id":"${prefix}mytelegram"}]
+}]
+}`
+  },
+    {
+              "name": "cta_url",
+              "buttonParamsJson": `{"display_text":"MESSAGE OWNER �","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+            },
+           {
+             "name": "quick_reply",
+             "buttonParamsJson": `{"display_text":"SCRIPT �","id":"${prefix}script"}`
+           },
+],
+})
+})
+}
+}
+}, {})
+
+await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
+messageId: msg.key.id
+})
+} else if (typemenu === 'v11') {
+let msg = generateWAMessageFromContent(m.chat, {
+viewOnceMessage: {
+message: {
+  "messageContextInfo": {
+    "deviceListMetadata": {},
+    "deviceListMetadataVersion": 2
+  },
+  interactiveMessage: proto.Message.InteractiveMessage.create({
+    body: proto.Message.InteractiveMessage.Body.create({
+      text: xmenu_oh
+    }),
+    footer: proto.Message.InteractiveMessage.Footer.create({
+      text: botname
+    }),
+    header: proto.Message.InteractiveMessage.Header.create({
+    ...(await prepareWAMessageMedia({ image : fs.readFileSync('./XeonMedia/theme/thumb.png')}, { upload: XeonBotInc.waUploadToServer})), 
+      title: ``,
+      gifPlayback: true,
+      subtitle: ownername,
+      hasMediaAttachment: false  
+    }),
+    nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
+      buttons: [
+   {
+     "name": "cta_url",
+     "buttonParamsJson": "{\"display_text\":\"Facebook\",\"url\":\"https://www.facebook.com/Debashi.Dey.X2\",\"merchant_url\":\"https://www.google.com\"}"
+  },
+  {
+     "name": "cta_url",
+     "buttonParamsJson": "{\"display_text\":\"Instagram 💧\",\"url\":\"https://www.instagram.com/debashis_x1\",\"merchant_url\":\"https://www.google.com\"}"
+  },
+  {
+     "name": "cta_url",
+     "buttonParamsJson": "{\"display_text\":\"GitHub 🔘\",\"url\":\"https://github.com/Debashis121212\",\"merchant_url\":\"https://www.google.com\"}"
+  },
+  {
+     "name": "cta_url",
+     "buttonParamsJson": "{\"display_text\":\"WhatsApp 🪀\",\"url\":\"https://wa.me/qr/ZPZ7Z6WYJ752O1\",\"merchant_url\":\"https://www.google.com\"}"
+  },              
+  {
+"name": "quick_reply",
+"buttonParamsJson": `{"display_text":"Allmenu 🗂️","id":"${prefix}allmenu"}`
+},
+  {
+    "name": "quick_reply",
+    "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
+  },
+  {
+    "name": "quick_reply",
+    "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
+  }
+                      ],
+    }),
+    contextInfo: {
+      mentionedJid: [m.sender], 
+      forwardingScore: 999,
+      isForwarded: true,
+ 
+  }
+  })
+}
+},
+}, {})
+
+await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
+messageId: msg.key.id
+})
+} else if (typemenu === 'v12') {
+let msg = generateWAMessageFromContent(from, {
+viewOnceMessage: {
+message: {
+"messageContextInfo": {
+"deviceListMetadata": {},
+"deviceListMetadataVersion": 2
+},
+interactiveMessage: proto.Message.InteractiveMessage.create({
+body: proto.Message.InteractiveMessage.Body.create({
+text: xmenu_oh
+}),
+footer: proto.Message.InteractiveMessage.Footer.create({
+text: botname
+}),
+header: proto.Message.InteractiveMessage.Header.create({
+    ...(await prepareWAMessageMedia({ image : fs.readFileSync('./XeonMedia/theme/thumb.png')}, { upload: XeonBotInc.waUploadToServer})), 
+      title: ``,
+      gifPlayback: true,
+      subtitle: ownername,
+      hasMediaAttachment: false  
+    }),
+nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
+buttons: [
+  {
+    "name": "single_select",
+    "buttonParamsJson": 
+`{"title":"MENU 🌺",
+"sections":[{"title":"${ownername}",
+"highlight_label":"${botname}",
+"rows":[{"header":"ALL MENU",
+"title":"click to display",
+"description":"Displays The List Of All The Features",
+"id":"${prefix}allmenu"}]
+}]
+}`
+  },
+  {
+    "name": "single_select",
+    "buttonParamsJson": 
+`{"title":"MY PROFILES 📡",
+"sections":[{"title":"${botname}",
+"rows":[
+{"header":"WHATSAPP CONTACT NUMBER",
+"title":"WhatsApp",
+"id":"${prefix}mywhatsapp"},
+{"header":"FACEBOOK",
+"title":"Follow me on Facebook",
+"id":"${prefix}myfb"},
+{"header":"INSTAGRAM",
+"title":"Follow me on Instagram",
+"id":"${prefix}myig"},
+{"header":"GITHUB",
+"title":"GitHub Profile",
+"id":"${prefix}mygithub"},
+{"header":"TELEGRAM",
+"title":"Telegram",
+"id":"${prefix}mytelegram"}]
+}]
+}`
+  },
+    
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+  },
+  {
+    "name": "cta_url",
+    "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+  },
+],
+}),
+contextInfo: {
+      mentionedJid: [m.sender], 
+      forwardingScore: 999,
+      isForwarded: true,
+ 
+    }
+})
+}
+}
+}, {})
+
+await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
+messageId: msg.key.id
+})
+}
+  }
 break
 case 'animemenu': {
 let xmenu_oh = `┌──❖ 𝔻𝔻 ℂℍ𝔼𝔼𝕄𝕊 𝔹𝕆𝕋 ❖──┐

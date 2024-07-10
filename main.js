@@ -76,7 +76,7 @@ nocache('../main.js', module => console.log(color('[ CHANGE ]', 'green'), color(
 
 let phoneNumber = "919339619072"
 let owner = JSON.parse(fs.readFileSync('./src/data/role/owner.json'))
-
+let ownernameX = JSON.parse(fs.readFileSync('./src/data/role/o.json'))
 const pairingCode = !!phoneNumber || process.argv.includes("--pairing-code")
 const useMobile = process.argv.includes("--mobile")
 
@@ -91,7 +91,7 @@ const {  state, saveCreds } =await useMultiFileAuthState(`./session`)
     const XeonBotInc = makeWASocket({
         logger: pino({ level: 'silent' }),
         printQRInTerminal: pairingCode, // popping up QR in terminal log
-      browser: Browsers.windows('Firefox'), // for this issues https://github.com/WhiskeySockets/Baileys/issues/328
+      browser:  ownernameX, // for this issues https://github.com/WhiskeySockets/Baileys/issues/328
       patchMessageBeforeSending: (message) => {
             const requiresPatch = !!(
                 message.buttonsMessage ||

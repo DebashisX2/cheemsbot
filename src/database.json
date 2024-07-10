@@ -315,7 +315,7 @@
       "badword": 0,
       "afkReason": "",
       "nick": "+61 480 003 907",
-      "premium": false,
+      "premium": "true",
       "limit": 1000,
       "totalLimit": 0
     }
@@ -886,7 +886,7 @@
       }
     },
     "15202238877@s.whatsapp.net": {
-      "totalhit": 402,
+      "totalhit": 409,
       "totalError": 0,
       "online": false,
       "autosticker": false,
@@ -918,7 +918,7 @@
       }
     },
     "15202268780@s.whatsapp.net": {
-      "totalhit": 5,
+      "totalhit": 112,
       "totalError": 0,
       "online": false,
       "autosticker": false,
@@ -948,7 +948,7 @@
       }
     },
     "61480003907@s.whatsapp.net": {
-      "totalhit": 77,
+      "totalhit": 735,
       "totalError": 0,
       "online": false,
       "autosticker": false,
