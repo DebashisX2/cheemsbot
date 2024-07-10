@@ -424,7 +424,6 @@ async function reaction_animal()
   let react = randomreact2[Math.floor(Math.random() * randomreact2.length)]
   await XeonBotInc.sendMessage(m.chat, { react: { text: `${react}`, key: m.key }})
 }
-emojisToExtract
 
 // Example usage:
 let inputText = "Hello! 😊 How are you? 🌍";
