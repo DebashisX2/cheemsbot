@@ -117,7 +117,7 @@ const {  state, saveCreds } =await useMultiFileAuthState(`./session`)
          creds: state.creds,
          keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "fatal" }).child({ level: "fatal" })),
       },
-      markOnlineOnConnect: isonline, // set false for offline
+      markOnlineOnConnect: true, // set false for offline
       generateHighQualityLinkPreview: true, // make high preview link
       getMessage: async (key) => {
             if (store) {
