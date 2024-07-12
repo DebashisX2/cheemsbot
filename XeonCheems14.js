@@ -399,17 +399,6 @@ caption: `${dgxeon + xeontext1}`,
 //end bug functions
 
         //premium
-        async function replyprem(teks) {
-    replygcxeon(`This feature is for premium user, contact the owner to become premium user`)
-}
-        //script replier
-        async function sendXeonBotIncMessage(chatId, message, options = {}){
-    let generate = await generateWAMessage(chatId, message, options)
-    let type2 = getContentType(generate.message)
-    if ('contextInfo' in options) generate.message[type2].contextInfo = options?.contextInfo
-    if ('contextInfo' in message) generate.message[type2].contextInfo = message?.contextInfo
-    return await XeonBotInc.relayMessage(chatId, generate.message, { messageId: generate.key.id })
-}
 
 //reactiom function
 
@@ -425,9 +414,6 @@ async function reaction_animal()
   await XeonBotInc.sendMessage(m.chat, { react: { text: `${react}`, key: m.key }})
 }
 
-// Example usage:
-let inputText = "Hello! 😊 How are you? 🌍";
-let emojisToExtract = ["😊", "🌍", "😃"]; // Define the emojis you want to extract
         //reply
         async function replygcxeon(teks) {
             if (typereply === 'v1') {
@@ -646,7 +632,7 @@ return arr[Math.floor(Math.random() * arr.length)]
                if (!('autosticker' in setting)) setting.autosticker = false 
                if (!('autodownload' in setting)) setting.autodownload = false 
                if (!('autobio' in setting)) setting.autobio = false 
-               if (!('autoread' in setting)) setting.autoread = false
+               if (!('autoread' in setting)) setting.autoread = true
                if (!('autorecordtype' in setting)) setting.autorecordtype = false
                if (!('autorecord' in setting)) setting.autorecord = false
                if (!('autotype' in setting)) setting.autotype = false
@@ -664,7 +650,7 @@ return arr[Math.floor(Math.random() * arr.length)]
                autosticker: false,
                autodownload: false,
                autobio: false,
-               autoread: false,
+               autoread: true,
                autoblocknum: false,
                onlyindia: false,
                onlyindo: false,
@@ -1823,75 +1809,72 @@ click https://wa.me/${botNumber.split`@`[0]}`, m, { mentions: [roof.p, roof.p2] 
 xeonverifieduser.push(sender)
 fs.writeFileSync('./src/data/role/user.json', JSON.stringify(xeonverifieduser, null, 2))
 }
-if(m.mtype === "emojimessage")
-{
-  XeonBotInc.sendMessage(from ,{ text: `this message contains emoji`})
-}
+
 if(reactall === true){
-if (!fromMe)
-  {
-      if(m.sender === ownernumber)
-      {
-        await XeonBotInc.sendMessage(m.chat, { react: { text: `${owner_react}`, key: m.key }})
-      }
-      
-      else{
-          if(isCommand)
-          {
-              await XeonBotInc.sendMessage(m.chat, { react: { text: `⌛`, key: m.key }})
-          }
-          else if (isXeonMedia === "stickerMessage")
-          {
-            await sleep(1000)
-            await XeonBotInc.sendMessage(m.chat, { react: { text: `💟`, key: m.key }})
-          }
-          else if (isXeonMedia==='imageMessage')
-          {
-            await sleep(1000)
-            await XeonBotInc.sendMessage(m.chat, { react: { text: `📸`, key: m.key }})
-          }
-          else if (isXeonMedia==='videoMessage')
-          {
-            await sleep(1000)
-            await XeonBotInc.sendMessage(m.chat, { react: { text: `📹`, key: m.key }})
-          }
-          else if (isXeonMedia==='audioMessage')
-          {
-            await sleep(1000)
-            await XeonBotInc.sendMessage(m.chat, { react: { text: `🎧`, key: m.key }})
-          }
-          else if (isXeonMedia==='pollCreationMessage')
-          {
-            await sleep(1000)
-            await XeonBotInc.sendMessage(m.chat, { react: { text: `❔`, key: m.key }})
-          }
-          
-          else if (isXeonMedia==='documentMessage')
+      if (!fromMe)
+        {
+            if(m.sender === ownernumber)
             {
-              await sleep(1000)
-              await XeonBotInc.sendMessage(m.chat, { react: { text: `📃`, key: m.key }})
+              await XeonBotInc.sendMessage(m.chat, { react: { text: `${owner_react}`, key: m.key }})
             }
-            else if (isXeonMedia==='contactMessage')
-              {
-                await sleep(1000)
-                await XeonBotInc.sendMessage(m.chat, { react: { text: `📞`, key: m.key }})
+            
+            else{
+                if(isCommand)
+                {
+                    await XeonBotInc.sendMessage(m.chat, { react: { text: `⌛`, key: m.key }})
+                }
+                else if (isXeonMedia === "stickerMessage")
+                {
+                  await sleep(1000)
+                  await XeonBotInc.sendMessage(m.chat, { react: { text: `💟`, key: m.key }})
+                }
+                else if (isXeonMedia==='imageMessage')
+                {
+                  await sleep(1000)
+                  await XeonBotInc.sendMessage(m.chat, { react: { text: `📸`, key: m.key }})
+                }
+                else if (isXeonMedia==='videoMessage')
+                {
+                  await sleep(1000)
+                  await XeonBotInc.sendMessage(m.chat, { react: { text: `📹`, key: m.key }})
+                }
+                else if (isXeonMedia==='audioMessage')
+                {
+                  await sleep(1000)
+                  await XeonBotInc.sendMessage(m.chat, { react: { text: `🎧`, key: m.key }})
+                }
+                else if (isXeonMedia==='pollCreationMessage')
+                {
+                  await sleep(1000)
+                  await XeonBotInc.sendMessage(m.chat, { react: { text: `❔`, key: m.key }})
+                }
+                
+                else if (isXeonMedia==='documentMessage')
+                  {
+                    await sleep(1000)
+                    await XeonBotInc.sendMessage(m.chat, { react: { text: `📃`, key: m.key }})
+                  }
+                  else if (isXeonMedia==='contactMessage')
+                    {
+                      await sleep(1000)
+                      await XeonBotInc.sendMessage(m.chat, { react: { text: `📞`, key: m.key }})
+                    }
+                else 
+                {
+                  await reaction()
+                }
               }
-          else 
-          {
-            await reaction()
-          }
+            
         }
-      
-  }
 }
 
         switch (isCommand) {
-          case 'hping':
-            {
+          // case 'hping':
+          //   {
               
-              XeonBotInc.sendMessage(from,{text : command.replace(prefix, '').slice(1).trim()})
-            }
-            break
+          //     XeonBotInc.sendMessage(from,{text : command.replace(prefix, '').slice(1).trim()})
+          //   }
+          //   break
             
         
           case 'global-reation':
@@ -1940,7 +1923,7 @@ if (!fromMe)
                 let good_react =['😀','😃','😄','😁','😆','🥹','☺️','😊','😇','🙂','🙃','😉','😍','😌','🥰','😘','😗','😙','😚','😋','😛','😝','🤓','😎','🤩','🥳','🙂‍↕️','🥺','🤗','🤔','🫣','🤭','🫢','🫡','🤫','🫠','🤠','😺','🎃','💜','❤️','💚','🖤','♥️','🤎','❤️‍🩹','❣','💕','💝','🫀','💖','💗','❤️‍🔥','💜','💌']
                 let emoji = good_react[Math.floor(Math.random() * good_react.length)]
               
-                XeonBotInc.sendMessage(from,
+               XeonBotInc.sendMessage(from,
                   {
                     image : imagesuffle,
                     caption : alive,
@@ -1959,20 +1942,21 @@ if (!fromMe)
                     }
                   },{quoted: q_alive}
                 )
-                XeonBotInc.sendMessage(m.chat, {
+               let response = XeonBotInc.sendMessage(m.chat, {
                   audio: fs.readFileSync('./XeonMedia/audio/nomoskar.mp3'),
                   mimetype: 'audio/mpeg',
                   ptt: true
               }, {
                   quoted: alive_audio
               })
-                await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key:m.key}})
+              await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key:m.key}})
+              await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key:response}})
               }
               break
 		case 'getvar': case 'allvar':
 			{
-				let variables = `
-1. 𝐘𝐨𝐮𝐓𝐮𝐛𝐞 𝐜𝐡𝐚𝐧𝐧𝐞𝐥 𝐥𝐢𝐧𝐤 : ${ytname}
+				let variables = 
+        `1. 𝐘𝐨𝐮𝐓𝐮𝐛𝐞 𝐜𝐡𝐚𝐧𝐧𝐞𝐥 𝐥𝐢𝐧𝐤 : ${ytname}
 2. 𝐆𝐢𝐭𝐡𝐮𝐛 𝐩𝐫𝐨𝐟𝐢𝐥𝐞 : ${socialm}
 3. 𝐀𝐝𝐝𝐫𝐞𝐬𝐬 : ${location}
 4. 𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤 𝐩𝐫𝐨𝐟𝐢𝐥𝐞 : ${fbprofile}
@@ -1998,9 +1982,27 @@ if (!fromMe)
 24. 𝐒𝐡𝐨𝐰 𝐰𝐞𝐥𝐜𝐨𝐦𝐞 𝐦𝐞𝐬𝐬𝐚𝐠𝐞 : ${welcome}
 25. 𝐀𝐧𝐭𝐢𝐜𝐚𝐥𝐥 : ${anticall}
 26. 𝐀𝐮𝐭𝐨 𝐬𝐭𝐚𝐭𝐮𝐬 𝐯𝐢𝐞𝐰 : ${autoswview}`
-		
-    replygcxeon(`${variables}`)
-			
+let imagesuffle  = ownerimages[Math.floor(Math.random() * ownerimages.length)]
+let good_react =['😀','😃','😄','😁','😆','🥹','☺️','😊','😇','🙂','🙃','😉','😍','😌','🥰','😘','😗','😙','😚','😋','😛','😝','🤓','😎','🤩','🥳','🙂‍↕️','🥺','🤗','🤔','🫣','🤭','🫢','🫡','🤫','🫠','🤠','😺','🎃','💜','❤️','💚','🖤','♥️','🤎','❤️‍🩹','❣','💕','💝','🫀','💖','💗','❤️‍🔥','💜','💌']
+let emoji = good_react[Math.floor(Math.random() * good_react.length)]
+              
+    XeonBotInc.sendMessage(from,
+      {
+        text : variables,
+        contextInfo:
+        {
+          externalAdReply:
+          {
+            showAdAttribution: true,
+            title: `Hello ${pushname} ${emoji}\nHere Are All The Variables Of This BOT`,
+            thumbnail: imagesuffle,
+            sourceUrl: fbprofile,
+            mediaType: 1,
+            renderLargerThumbnail : true
+          }
+        }
+      },{quoted: m}
+    )
 			}
 			break
       case 'money':{
@@ -21064,7 +21066,12 @@ viewOnceMessage: {
               "name": "cta_url",
               "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
             },
-     ]
+            {
+              name: quick_reply,
+                buttonParamsJson: {display_text:`Next ➡️`, id:`${prefix + command}`}
+              }
+           
+         ]
        
         }),
         contextInfo: {  
@@ -21111,6 +21118,7 @@ else if (typemenu === 'v13')
     let stalkermenu1 = `Hi ${stalkermenu(prefix, hituet)}`
     let bugmenu1 = `Hi ${bugmenu(prefix, hituet)}`
     let othermenu1 = `Hi ${othermenu(prefix, hituet)}`
+    let mymenu1 = `Hi ${mymenu(prefix, hituet)}`
     const slides = [
       
       [
@@ -21317,6 +21325,7 @@ else if (typemenu === 'v13')
         'cta_url', // Button type
         'https://youtube.com/@dgxeon' // URL (used in image generation)
     ], 
+    
 
 ];
 
