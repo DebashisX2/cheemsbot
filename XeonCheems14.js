@@ -1877,6 +1877,18 @@ if(reactall === true){
           //   break
             
         
+          case 'gpp':
+            {
+  let pp = await XeonBotInc.profilePictureUrl(m.chat, 'image')|| 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
+  let ppgroup = await getBuffer(pp)
+  XeonBotInc.sendMessage(from,
+    {
+      image: ppgroup,
+      caption: `Group Icon of ${groupName} Group`
+    }
+  )
+            }
+            break
           case 'global-reation':
             {
               if(!XeonTheCreator) return XeonStickOwner()
@@ -1922,8 +1934,9 @@ if(reactall === true){
                 let imagesuffle  = ownerimages[Math.floor(Math.random() * ownerimages.length)]
                 let good_react =['😀','😃','😄','😁','😆','🥹','☺️','😊','😇','🙂','🙃','😉','😍','😌','🥰','😘','😗','😙','😚','😋','😛','😝','🤓','😎','🤩','🥳','🙂‍↕️','🥺','🤗','🤔','🫣','🤭','🫢','🫡','🤫','🫠','🤠','😺','🎃','💜','❤️','💚','🖤','♥️','🤎','❤️‍🩹','❣','💕','💝','🫀','💖','💗','❤️‍🔥','💜','💌']
                 let emoji = good_react[Math.floor(Math.random() * good_react.length)]
-              
-               XeonBotInc.sendMessage(from,
+              if(!isGroup)
+                {
+                  XeonBotInc.sendMessage(from,
                   {
                     image : imagesuffle,
                     caption : alive,
@@ -1942,7 +1955,32 @@ if(reactall === true){
                     }
                   },{quoted: q_alive}
                 )
-               let response = XeonBotInc.sendMessage(m.chat, {
+              }
+              else if(isGroup)
+              {
+                let pp = await XeonBotInc.profilePictureUrl(m.chat, 'image')|| 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
+                let gpp = await getBuffer(pp)
+                XeonBotInc.sendMessage(from,
+                  {
+                    image : gpp,
+                    caption : alive,
+                    contextInfo:
+                    {
+                      externalAdReply:
+                      {
+                        showAdAttribution: true,
+                        title: `Hello ${pushname} ${emoji} \nThis is ${botname} 👑`,
+                        body: ownername,
+                        thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'),
+                        sourceUrl: wagc,
+                        mediaType: 1,
+                        renderLargerThumbnail: true
+                      }
+                    }
+                  },{quoted: q_alive}
+                )
+              }
+               XeonBotInc.sendMessage(m.chat, {
                   audio: fs.readFileSync('./XeonMedia/audio/nomoskar.mp3'),
                   mimetype: 'audio/mpeg',
                   ptt: true
@@ -1950,7 +1988,6 @@ if(reactall === true){
                   quoted: alive_audio
               })
               await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key:m.key}})
-              await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key:response}})
               }
               break
 		case 'getvar': case 'allvar':
@@ -2027,10 +2064,10 @@ let emoji = good_react[Math.floor(Math.random() * good_react.length)]
           }
           break
           
-  case 'username':
+  case 'username': case 'u' :
     {
       await XeonBotInc.sendMessage(m.chat, { react: { text: `⁉️`, key: m.key }})
-       let user= m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net' 
+      let user= m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
         username =XeonBotInc.getName(user)
         
   try {
@@ -2714,7 +2751,8 @@ break
    }
   break
   case 'upp': case 'profpic': {
-      a= m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
+    await XeonBotInc.sendMessage(m.chat, { react: { text: `⁉️`, key: m.key }})
+      a= m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
       try {
           ppuser = await XeonBotInc.profilePictureUrl(a, 'image')
           } catch (err) {
@@ -2723,7 +2761,8 @@ break
           XeonWlcm = await getBuffer(ppuser)
           let username =XeonBotInc.getName(a)
           dpuser = `here is ${username}'s profile picture`
-          
+          await XeonBotInc.sendMessage(m.chat, { react: { text: `👤`, key: m.key }})
+
           XeonBotInc.sendMessage(m.chat, {
               image: XeonWlcm,
               caption: dpuser,
@@ -2732,7 +2771,8 @@ break
           }, {
               quoted: m
           })
-  
+await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key: m.key }})
+
   }
       break
 
@@ -21065,11 +21105,7 @@ viewOnceMessage: {
             {
               "name": "cta_url",
               "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
-            },
-            {
-              name: quick_reply,
-                buttonParamsJson: {display_text:`Next ➡️`, id:`${prefix + command}`}
-              }
+            }
            
          ]
        
@@ -21707,7 +21743,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
@@ -22134,7 +22170,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
@@ -22495,7 +22531,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
@@ -22856,7 +22892,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
@@ -23217,7 +23253,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
@@ -23578,7 +23614,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
@@ -23940,7 +23976,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
@@ -24277,7 +24313,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
@@ -24638,7 +24674,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
@@ -24999,7 +25035,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
@@ -25361,7 +25397,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
@@ -25722,7 +25758,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
@@ -26085,7 +26121,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
@@ -26446,7 +26482,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
@@ -26807,7 +26843,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
@@ -27168,7 +27204,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
@@ -27529,7 +27565,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
@@ -27890,7 +27926,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
@@ -28251,7 +28287,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === '') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
@@ -28612,7 +28648,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
@@ -28973,7 +29009,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
@@ -29334,7 +29370,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
@@ -29695,7 +29731,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === 'v12') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {
